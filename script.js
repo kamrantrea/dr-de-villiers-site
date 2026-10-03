@@ -155,6 +155,10 @@
         setTimeout(() => $('#firstName').focus({ preventScroll: true }), 700);
     }));
 
+    // links from other pages can pre-select a treatment: index.html?treatment=Biostimulators#book
+    const wanted = new URLSearchParams(location.search).get('treatment');
+    if (wanted && [...select.options].some((o) => o.value === wanted || o.text === wanted)) select.value = wanted;
+
     // dock (mobile bar) hides while the form itself is on screen
     const dock = $('#dock');
     if (dock && 'IntersectionObserver' in window) {

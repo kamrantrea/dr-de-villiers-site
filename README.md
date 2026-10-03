@@ -66,6 +66,11 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 - [ ] Set up the professional email on her domain.
 - [ ] Check Irish Medical Council guidance on advertising. Testimonials were deliberately left out because of the Council's restrictions.
 
+## Unlisted pages (share by link)
+
+- `collagen.html`: an interactive "collagen factory" guide (drag through time, tap the cells). It is not linked from the home page and is marked `noindex` so Google does not list it. Share the link directly, for example in an Instagram story. To make it public later, add a link to it on the home page and delete the `noindex` line in `collagen.html`.
+- `index.html?preview=shop`: the shop with sample products.
+
 ## Icons and share image
 
 `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-512.png` and `og-image.png` are already in place. The share image is what shows when the link is sent on WhatsApp or posted on Instagram. In `index.html`, the `og:image` address currently points at the GitHub Pages URL; change it to her real domain once that is live.
