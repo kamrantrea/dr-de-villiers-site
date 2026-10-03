@@ -194,6 +194,8 @@
         render();
     });
     q.addEventListener('input', render);
+    document.addEventListener('keydown', (e) => { if (e.key === '/' && !openDrawer && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); q.focus(); } });
+    q.placeholder = 'Search products  ( / )';
     $('#clearFilters').addEventListener('click', () => { q.value = ''; cat = 'All'; $$('.cat', cats).forEach((x) => { const on = x.dataset.cat === 'All'; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); }); render(); });
     render();
 
@@ -237,7 +239,7 @@
     const bc = $('#basketCount');
     const paintCount = () => { const n = count(); bc.textContent = n; bc.hidden = !n; };
     const flash = () => { const b = $('#basketBtn'); if (reduce) return; b.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.1)' }, { transform: 'scale(1)' }], { duration: 350 }); };
-    const add = (id) => { list[id] = Math.min(9, (list[id] || 0) + 1); save(); paintCount(); paintBasket(); flash(); };
+    const add = (id) => { if (window.Feel) Feel.tick(); list[id] = Math.min(9, (list[id] || 0) + 1); save(); paintCount(); paintBasket(); flash(); };
 
     const bItems = $('#bItems'), bEmpty = $('#bEmpty'), bForm = $('#bForm');
     function paintBasket() {
@@ -294,6 +296,7 @@
             list = {}; save(); paintCount(); paintBasket(); bForm.reset();
             $('#bItems').hidden = true; bEmpty.hidden = true; bForm.hidden = true;
             const sent = $('#bSent'); sent.hidden = false; sent.focus();
+            if (window.Feel) { Feel.chime(); Feel.sparkle($('.icon-disc', sent)); }
         } catch (err) {
             say('err', 'Your enquiry did not send. Please try again' + (C.whatsapp && !isPlaceholder(C.whatsapp) ? ', or message directly on WhatsApp.' : '.'));
         } finally { bSubmit.disabled = false; bSubmit.textContent = label; }
@@ -385,7 +388,7 @@
         guide.set('happy');
 
         const chipsHTML = () => { qc.innerHTML = CHIPS.map(([l, v]) => `<button type="button" class="qc" data-v="${esc(v)}">${esc(l)}</button>`).join(''); };
-        const bubble = (cls, html) => { const d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d; };
+        const bubble = (cls, html) => { if (cls === 'bot' && window.Feel) Feel.pop(); const d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d; };
         const bot = (r) => new Promise((res) => {
             busy = true;
             guide.set('think');

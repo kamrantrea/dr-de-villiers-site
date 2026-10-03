@@ -80,3 +80,9 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 The shop lives at `<site-address>/shop.html`. It is unlisted (`noindex`), so share the link directly. Until she adds real products it shows sample ones with a banner. Each product opens in a sheet with a small scripted guide called Fibro (keyword answers built from the product details she writes; it is not AI and gives no medical advice, and anything health-related is passed to Dr De Villiers). Products without a `link` use an Enquire list that is emailed to her through the same Web3Forms key.
 
 Open `products.js` and follow the comment at the top: copy one block per product (name, category, price, size, description, how to use, good for, pairs, optional photo and Stripe Payment Link). A Shop link then appears in the main menu automatically; with an empty list the menu has no Shop link. Stripe Payment Links give Apple Pay and Google Pay with no extra work. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.
+
+
+## Fonts, sounds and small touches
+- Fonts (Cormorant Garamond and Montserrat, SIL Open Font Licence) are hosted in `fonts/`, so the site makes no Google request, loads faster and stays private for patients.
+- `polish.js` holds the small touches: soft sounds (a Sounds on/off switch sits in the footer; remembered per visitor), light haptics on phones, a gold reading-progress line, instant page loads, and a sparkle when an enquiry is sent. Delete the `polish.js` script line from the pages to remove all of it.
+- In the shop, press `/` to jump to search.

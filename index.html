@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dr Chrisna De Villiers | Aesthetic medicine, Ballincollig, Cork</title>
     <meta name="description" content="Medically-led aesthetic treatments in Ballincollig, Cork by IMC-registered doctor Dr Chrisna De Villiers. Anti-wrinkle injections, dermal fillers, biostimulators and medical-grade skincare.">
+    <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#faf6f1">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Dr Chrisna De Villiers | Aesthetic medicine, Cork">
@@ -18,10 +19,9 @@
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1791043368">
+    <link rel="preload" href="fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="fonts/cormorant.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="style.css?v=1791043912">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -359,9 +359,9 @@
                 <p class="lead">Takes about a minute. No payment needed.</p>
                 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="botcheck" tabindex="-1" autocomplete="off"></label></div>
                 <div class="form-grid">
-                    <div class="field"><label for="firstName">First name</label><input class="control" id="firstName" name="first_name" type="text" required autocomplete="given-name"></div>
-                    <div class="field"><label for="lastName">Last name</label><input class="control" id="lastName" name="last_name" type="text" required autocomplete="family-name"></div>
-                    <div class="field"><label for="email">Email</label><input class="control" id="email" name="email" type="email" required autocomplete="email" inputmode="email"></div>
+                    <div class="field"><label for="firstName">First name</label><input class="control" id="firstName" name="first_name" type="text" required autocomplete="given-name" autocapitalize="words" enterkeyhint="next"></div>
+                    <div class="field"><label for="lastName">Last name</label><input class="control" id="lastName" name="last_name" type="text" required autocomplete="family-name" autocapitalize="words" enterkeyhint="next"></div>
+                    <div class="field"><label for="email">Email</label><input class="control" id="email" name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" enterkeyhint="next"></div>
                     <div class="field"><label for="phone">Phone</label><input class="control" id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"></div>
                     <div class="field span2">
                         <label for="treatment">Treatment of interest</label>
@@ -436,8 +436,9 @@
     <a class="btn btn-solid" href="#book">Book now</a>
 </div>
 
-<script src="config.js?v=1791043368"></script>
-<script src="products.js?v=1791043368"></script>
-<script src="script.js?v=1791043368" defer></script>
+<script src="config.js?v=1791043912"></script>
+<script src="products.js?v=1791043912"></script>
+<script src="script.js?v=1791043912" defer></script>
+<script src="polish.js?v=1791043912" defer></script>
 </body>
 </html>

@@ -64,6 +64,7 @@
     const desktop = window.matchMedia('(min-width: 961px)');
 
     const setMenu = (open) => {
+        if (window.Feel && open !== header.classList.contains('open')) Feel.tap();
         header.classList.toggle('open', open);
         document.documentElement.classList.toggle('menu-open', open);
         menuBtn.setAttribute('aria-expanded', String(open));
@@ -262,6 +263,7 @@
             form.hidden = true;
             sentPanel.hidden = false;
             sentPanel.focus();
+            if (window.Feel) { Feel.chime(); Feel.sparkle($('.icon-disc', sentPanel)); }
             form.reset();
         } catch (err) {
             say('err', 'Your request did not send. Please try again' + (has.whatsapp || has.phone ? ', or message or call directly.' : '.'));
