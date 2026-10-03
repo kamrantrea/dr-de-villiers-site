@@ -69,6 +69,24 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
+    /* ---------- back to top ---------- */
+    const toTop = $('#toTop');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const toggleTop = () => toTop.classList.toggle('show', window.scrollY > 700);
+    toggleTop();
+    window.addEventListener('scroll', toggleTop, { passive: true });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+    /* ---------- gentle reveal for content below the fold (never hides anything without JS) ---------- */
+    if ('IntersectionObserver' in window && !reduceMotion) {
+        const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        $$('.head, .about-copy, .about-media, .creds li, .path li, .treat, .pillar, .quote, .step, .faq, .cta .wrap > *, .book-copy, .book-form, .product').forEach((el) => {
+            if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('reveal'); io.observe(el); }
+        });
+    }
+
     /* ---------- booking: every Book button lands on the form ---------- */
     const form = $('#enquiryForm');
     const select = $('#treatment');
