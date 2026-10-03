@@ -4,9 +4,9 @@
    there are never any broken buttons on the live site.
    ============================================================ */
 window.SITE = {
-    email:        'hello@example.ie',          // shown on the site
-    phone:        '+353 XX XXX XXXX',          // shown and used for the Call button
-    whatsapp:     '353XXXXXXXXX',              // digits only, country code first, no + or spaces
+    email:        'dkhsjets@gmail.com',          // shown on the site
+    phone:        '+353 85 840 7680',          // shown and used for the Call button
+    whatsapp:     '353858407680',              // digits only, country code first, no + or spaces
     instagram:    'drchrisnaaesthetics',       // handle only (blank hides the link)
     address:      '',                          // optional, e.g. 'Unit 3, Main Street, Ballincollig, Co. Cork' (adds a Directions link)
     googleReviews:'',                          // optional link to her Google reviews (adds a link, no quotes shown)
