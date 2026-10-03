@@ -564,6 +564,9 @@ html.drawer-open { overflow: hidden; }
 .shop-hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.2rem); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
 .shop-hero h1 em { font-style: italic; color: var(--gold-dark); }
 .shop-hero p { max-width: 34em; color: var(--charcoal-soft); font-size: 1.02rem; }
+.hero-fibro { display: block; text-decoration: none; cursor: pointer; transition: transform 0.3s var(--ease); }
+.hero-fibro:hover { transform: rotate(-3deg) scale(1.04); }
+.g-av { display: block; }
 .hero-fibro { position: relative; width: clamp(120px, 16vw, 190px); padding-top: 54px; }
 .hero-fibro svg { width: 100%; height: auto; overflow: visible; }
 .hero-fibro .fibro-bubble { right: auto; left: 50%; top: 0; transform: translateX(-30%); max-width: 190px; }

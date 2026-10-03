@@ -329,7 +329,7 @@
             </div>` : ''}
             ${pairs.length ? `<div class="p-pairs"><h3>Goes well with</h3><div>${pairs.map((x) => `<button type="button" class="pair" data-open="${esc(x.id)}">${esc(x.name)}</button>`).join('')}</div></div>` : ''}
             <section class="guide" aria-label="Ask Fibro about this product">
-                <div class="guide-head"><div class="g-av" id="gAv"></div><div><b>Ask Fibro</b><span>Quick answers from Dr de Villiers’ notes. A scripted guide, not medical advice.</span></div></div>
+                <div class="guide-head"><a class="g-av" id="gAv" href="collagen.html" aria-label="Meet Fibro: see how your skin builds collagen" title="See how Fibro builds collagen"></a><div><b>Ask Fibro</b><span>Quick answers from Dr de Villiers’ notes. A scripted guide, not medical advice.</span></div></div>
                 <div class="chat" id="chat" role="log" aria-live="polite"></div>
                 <div class="qchips" id="qchips"></div>
                 <form class="ask" id="ask" autocomplete="off"><label class="sr" for="askIn">Ask Fibro a question</label><input id="askIn" class="control" type="text" placeholder="Ask about this product" maxlength="120"><button class="send" type="submit" aria-label="Send"><svg class="icon"><use href="#i-send"/></svg></button></form>
