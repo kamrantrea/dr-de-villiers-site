@@ -68,7 +68,7 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 
 ## Unlisted pages (share by link)
 
-- `collagen.html`: an interactive "collagen factory" guide (drag through time, tap the cells). It is not linked from the home page and is marked `noindex` so Google does not list it. Share the link directly, for example in an Instagram story. To make it public later, add a link to it on the home page and delete the `noindex` line in `collagen.html`.
+- `collagen.html`: an interactive guide to how skin builds collagen. The skin picture stays pinned while you scroll four short steps, with a timeline slider, tappable cells and a little character, Fibro the fibroblast, whose face changes at each stage. It is not linked from the home page and is marked `noindex` so Google does not list it. Share the link directly, for example in an Instagram story. To make it public later, add a link to it on the home page and delete the `noindex` line in `collagen.html`.
 - `index.html?preview=shop`: the shop with sample products.
 
 ## Icons and share image

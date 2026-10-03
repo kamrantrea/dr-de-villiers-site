@@ -42,74 +42,64 @@
     <section class="lab-hero">
         <div class="wrap">
             <span class="kicker">Interactive guide</span>
-            <h1>The collagen factory</h1>
-            <p>Your skin already knows how to renew itself. Drag through time and tap the cells to see how.</p>
+            <h1>How your skin builds collagen</h1>
+            <p>Meet Fibro, a fibroblast. Scroll, drag the timeline, or tap the cells to see how your own skin can renew itself.</p>
         </div>
     </section>
 
-    <section class="lab-section">
-        <div class="wrap">
-            <div class="lab" id="lab">
-                <div class="lab-canvas">
-                    <svg id="cf" viewBox="0 36 800 464" role="img" aria-labelledby="cfTitle cfDesc" preserveAspectRatio="xMidYMid meet">
-                        <title id="cfTitle">Cross-section of skin showing collagen fibres and fibroblast cells</title>
-                        <desc id="cfDesc">An illustration that changes as you move the time slider: fibroblasts wake up, new collagen fibres grow, and the skin surface becomes smoother.</desc>
-                    </svg>
-                    <p class="lab-hint" id="labHint">Drag the slider, or tap a cell</p>
-                </div>
-
-                <div class="lab-controls">
-                    <div class="stages" role="group" aria-label="Jump to a stage">
-                        <button type="button" data-stage="0" class="on">Before</button>
-                        <button type="button" data-stage="1">Treatment day</button>
-                        <button type="button" data-stage="2">Weeks later</button>
-                        <button type="button" data-stage="3">Months later</button>
+    <section class="story" id="story">
+        <div class="wrap story-grid">
+            <div class="stage-col">
+                <div class="stage">
+                    <div class="lab-canvas">
+                        <svg id="cf" viewBox="0 36 800 464" role="img" aria-labelledby="cfTitle cfDesc" preserveAspectRatio="xMidYMid meet">
+                            <title id="cfTitle">Cross-section of skin showing collagen fibres and fibroblast cells</title>
+                            <desc id="cfDesc">An illustration that changes as you scroll or move the timeline: fibroblasts wake up, new collagen fibres grow, and the skin surface becomes smoother.</desc>
+                        </svg>
+                        <p class="cell-note" id="cellNote" hidden></p>
+                        <button class="fibro" id="fibro" type="button" aria-label="Fibro the fibroblast. Tap to say hello.">
+                            <span class="fibro-bubble" id="fibroSay" aria-live="polite">Zzz... I'm a bit tired</span>
+                            <svg id="fibroSvg" viewBox="-70 -62 140 120" aria-hidden="true"></svg>
+                        </button>
                     </div>
-                    <div class="time-row">
-                        <button class="play" id="play" type="button" aria-label="Play the animation"><svg class="icon"><use href="#i-play"/></svg></button>
-                        <label class="sr" for="time">Time</label>
-                        <input id="time" type="range" min="0" max="100" value="0" step="1" aria-valuetext="Before">
+                    <div class="timeline">
+                        <input id="time" type="range" min="0" max="100" value="0" step="1" aria-label="Time" aria-valuetext="Before">
+                        <div class="tick-row" role="group" aria-label="Jump to a stage">
+                            <button type="button" data-stage="0" class="on">Before</button>
+                            <button type="button" data-stage="1">Treatment</button>
+                            <button type="button" data-stage="2">Weeks</button>
+                            <button type="button" data-stage="3">Months</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="lab-readout" aria-live="polite">
-                    <h2 id="stageTitle">Skin that has slowed down</h2>
-                    <p id="stageText"></p>
-                    <p class="cell-note" id="cellNote" hidden></p>
-                </div>
-
-                <ul class="legend">
-                    <li><i class="dot old"></i>Existing collagen</li>
-                    <li><i class="dot new"></i>New collagen</li>
-                    <li><i class="dot cell"></i>Fibroblast</li>
-                    <li><i class="dot part"></i>Biostimulator particles</li>
-                </ul>
             </div>
-            <p class="lab-fine">Simplified illustration for education, not a patient result. Results vary from person to person, and whether a treatment is right for you is decided at a consultation.</p>
-        </div>
-    </section>
 
-    <section class="section bg-cream">
-        <div class="wrap">
-            <div class="head center">
-                <span class="kicker">The short version</span>
-                <h2>Working with your own skin</h2>
-            </div>
-            <div class="treat-grid three">
-                <article class="card treat">
-                    <h3>Fibroblasts</h3>
-                    <p>These are the cells in the deeper layer of your skin, the dermis, that build collagen and elastin. They are the factory workers. From our twenties they gradually slow down.</p>
+            <div class="beats">
+                <article class="beat is-on" data-stage="0">
+                    <span class="beat-k">Before</span>
+                    <h2>Skin that has slowed down</h2>
+                    <p>From our twenties, fibroblasts, the cells that build collagen, gradually slow down. Fibres thin out and break up, and fine lines and loss of volume begin to show.</p>
+                    <p class="beat-tip">Try tapping a cell, or Fibro.</p>
                 </article>
-                <article class="card treat">
-                    <h3>Biostimulators</h3>
-                    <p>Placed by a doctor in the deeper layers, they are not an instant filler. They send a signal that prompts your own fibroblasts to start building collagen again.</p>
+                <article class="beat" data-stage="1">
+                    <span class="beat-k">Treatment day</span>
+                    <h2>A signal, not a filler</h2>
+                    <p>Dr de Villiers places a biostimulator in the deeper layers of the skin. It is not an instant filler. It is a signal to your own cells.</p>
                 </article>
-                <article class="card treat">
-                    <h3>Gradual by design</h3>
-                    <p>New collagen takes weeks to months to build, so change is subtle and natural looking. Your plan and timing are set together at your consultation.</p>
+                <article class="beat" data-stage="2">
+                    <span class="beat-k">Weeks later</span>
+                    <h2>The factory restarts</h2>
+                    <p>Your fibroblasts respond and start building new collagen. The change is gradual and subtle, which is why it looks natural.</p>
+                </article>
+                <article class="beat" data-stage="3">
+                    <span class="beat-k">Months later</span>
+                    <h2>Skin that renews itself</h2>
+                    <p>New collagen keeps building while the biostimulator is slowly absorbed. For many people, skin quality and firmness improve over time. Your plan and timing are set at your consultation.</p>
+                    <a class="btn btn-solid" href="index.html?treatment=Biostimulators#book">Book a consultation</a>
                 </article>
             </div>
         </div>
+        <div class="wrap"><p class="lab-fine">Simplified illustration for education, not a patient result. Results vary from person to person, and whether a treatment is right for you is decided at a consultation.</p></div>
     </section>
 
     <section class="cta">
