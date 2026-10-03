@@ -4,22 +4,21 @@ A fast, single-page static site (plain HTML/CSS/JS, no build step), hosted free 
 
 Patients fill in an enquiry form, it is emailed to Dr de Villiers via Web3Forms, and she confirms by reply and books them into Clever Clinic as usual. There is also a WhatsApp button and a Call button.
 
-Files: `index.html` (the page), `style.css` (the design), `privacy.html` (draft policy), `book.html` (short link that jumps to the booking form), `images/` (photos).
+Files: `index.html` (the page), `style.css` (the design, organised as tokens > base > layout > components > sections > responsive), `config.js` (her contact details, the only file she edits), `products.js` (optional shop), `script.js` (behaviour), `privacy.html` (draft policy), `book.html` (short link that jumps to the booking form), `images/` (photos).
 
-## 1. Fill in the details (index.html)
+## 1. Fill in the details (config.js)
 
-Open `index.html`, scroll to the `CONFIG` block near the bottom, and edit:
+Open `config.js` and edit:
 
 | Setting | What it is |
 |---|---|
 | `email` | Email shown on the site |
 | `phone` | Phone shown and used for the Call button |
 | `whatsapp` | Digits only with country code, e.g. `353871234567` (no `+`, no spaces) |
-| `location` | Already set to `Ballincollig, Co. Cork` |
 | `instagram` | Her Instagram handle (optional). Leave empty and the footer link stays hidden |
 | `web3formsKey` | Access key from Web3Forms (step 2) |
 
-Until a real key is added the form runs in demo mode and shows a "not connected yet" message, so you can safely show it to her.
+Anything left as a placeholder is hidden automatically (no dead Call, WhatsApp or email buttons). Until a real key is added the form runs in demo mode and shows a "not connected yet" message.
 
 ## 2. Make the form email her (5 minutes, free)
 
@@ -50,7 +49,7 @@ On github.com open the `images` folder, click **Add file > Upload files**, and d
 - `hero.jpg` - portrait of Dr de Villiers for the top of the page (portrait orientation)
 - `about.jpg` - second photo for the About section
 
-Name them exactly like that. They replace the placeholders automatically. Use her own photos, ideally under 500 KB each. Good photography is the single biggest thing that makes the site feel premium.
+Name them exactly like that. They replace the temporary royalty-free stock images (Unsplash) automatically. Remove the `onerror=` stock fallback in `index.html` once her own photos are in. Use her own photos, ideally under 500 KB each. Good photography is the single biggest thing that makes the site feel premium.
 
 ## 6. Instagram link in bio
 
@@ -64,6 +63,6 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 - [ ] Set up the professional email on her domain.
 - [ ] Check Irish Medical Council guidance on advertising. Testimonials were deliberately left out because of the Council's restrictions.
 
-## Later: selling products
+## Selling products
 
-Easiest route is Stripe Payment Links or a Shopify Buy Button, linked from a Shop section. No rebuild needed.
+Open `products.js` and follow the comment at the top: create a Stripe Payment Link, paste one block per product, upload the photo. A Shop section and menu link then appear automatically; with an empty list nothing shows. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.

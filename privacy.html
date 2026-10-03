@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +13,10 @@
 </head>
 <body>
     <a class="skip" href="#main">Skip to content</a>
-    <header class="site-header" id="siteHeader">
+    <header class="site-header scrolled">
         <div class="wrap header-row">
-            <a class="wordmark" href="index.html#top">Dr Chrisna de Villiers<small>Aesthetic medicine</small></a>
-            <nav class="nav" id="nav" aria-label="Main">
-                <ul>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#treatments">Treatments</a></li>
-                    <li><a href="index.html#approach">Approach</a></li>
-                    <li><a href="index.html#visit">Your visit</a></li>
-                    <li><a class="nav-book" href="index.html#book">Book</a></li>
-                </ul>
-            </nav>
-            <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+            <a class="wordmark" href="index.html#top"><b>Dr Chrisna de Villiers</b><small>Aesthetic medicine</small></a>
+            <a class="btn btn-ghost btn-sm" href="index.html">Back to site</a>
         </div>
     </header>
 
@@ -46,22 +37,5 @@
         <h2>Contact</h2>
         <p>Dr Chrisna de Villiers, IMC 413939. Email: see the booking section of the website.</p>
     </main>
-    <script>
-        const header = document.getElementById('siteHeader');
-        const menuBtn = document.getElementById('menuBtn');
-        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        menuBtn.addEventListener('click', () => {
-            const open = header.classList.toggle('open');
-            menuBtn.setAttribute('aria-expanded', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-        });
-        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
-            header.classList.remove('open');
-            menuBtn.setAttribute('aria-expanded', false);
-            document.body.style.overflow = '';
-        }));
-    </script>
 </body>
 </html>
