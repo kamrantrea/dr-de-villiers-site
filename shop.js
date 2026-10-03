@@ -263,7 +263,7 @@
     paintCount(); paintBasket();
 
     $('#bLead').textContent = sample
-        ? 'Sample mode: this is a preview, so nothing is sent. Once Dr de Villiers adds her range, your list will be emailed to her and she will reply to confirm availability and how to pay or collect.'
+        ? 'Sample mode: this is a preview, so nothing is sent. Once Dr De Villiers adds her range, your list will be emailed to her and she will reply to confirm availability and how to pay or collect.'
         : $('#bLead').textContent;
 
     const bStatus = $('#bStatus'), bSubmit = $('#bSubmit');
@@ -272,8 +272,8 @@
         e.preventDefault();
         if (!bForm.checkValidity()) { bForm.reportValidity(); return; }
         if (bForm.botcheck.value) return;
-        if (sample) { say('ok', 'Preview only: nothing was sent. When the shop is live, this goes straight to Dr de Villiers.'); return; }
-        if (isPlaceholder(C.web3formsKey)) { say('ok', 'Demo mode: the form is not connected yet. Add the Web3Forms key in config.js and enquiries will be emailed to Dr de Villiers.'); return; }
+        if (sample) { say('ok', 'Preview only: nothing was sent. When the shop is live, this goes straight to Dr De Villiers.'); return; }
+        if (isPlaceholder(C.web3formsKey)) { say('ok', 'Demo mode: the form is not connected yet. Add the Web3Forms key in config.js and enquiries will be emailed to Dr De Villiers.'); return; }
         const lines = Object.keys(list).map((id) => `${list[id]} x ${byId[id].name}${byId[id].size ? ' (' + byId[id].size + ')' : ''}${byId[id].price ? ' - ' + byId[id].price : ''}`);
         const data = {
             access_key: C.web3formsKey,
@@ -319,7 +319,7 @@
                         ${p.link ? `<a class="btn btn-solid" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>` : ''}
                         <button class="btn ${p.link ? 'btn-ghost' : 'btn-solid'}" type="button" id="addBtn"><svg class="icon"><use href="#i-plus"/></svg><span>Add to enquiry</span></button>
                     </div>
-                    <p class="fine" id="addNote">${p.link ? 'Pay securely on the next page. Apple Pay and Google Pay are supported.' : 'No payment now. Dr de Villiers will reply by email to confirm.'}</p>
+                    <p class="fine" id="addNote">${p.link ? 'Pay securely on the next page. Apple Pay and Google Pay are supported.' : 'No payment now. Dr De Villiers will reply by email to confirm.'}</p>
                 </div>
             </div>
             ${p.howTo && p.howTo.length || p.goodFor && p.goodFor.length || p.key ? `<div class="p-details">
@@ -329,7 +329,7 @@
             </div>` : ''}
             ${pairs.length ? `<div class="p-pairs"><h3>Goes well with</h3><div>${pairs.map((x) => `<button type="button" class="pair" data-open="${esc(x.id)}">${esc(x.name)}</button>`).join('')}</div></div>` : ''}
             <section class="guide" aria-label="Ask Fibro about this product">
-                <div class="guide-head"><a class="g-av" id="gAv" href="collagen.html" aria-label="Meet Fibro: see how your skin builds collagen" title="See how Fibro builds collagen"></a><div><b>Ask Fibro</b><span>Quick answers from Dr de Villiers’ notes. A scripted guide, not medical advice.</span></div></div>
+                <div class="guide-head"><a class="g-av" id="gAv" href="collagen.html" aria-label="Meet Fibro: see how your skin builds collagen" title="See how Fibro builds collagen"></a><div><b>Ask Fibro</b><span>Quick answers from Dr De Villiers’ notes. A scripted guide, not medical advice.</span></div></div>
                 <div class="chat" id="chat" role="log" aria-live="polite"></div>
                 <div class="qchips" id="qchips"></div>
                 <form class="ask" id="ask" autocomplete="off"><label class="sr" for="askIn">Ask Fibro a question</label><input id="askIn" class="control" type="text" placeholder="Ask about this product" maxlength="120"><button class="send" type="submit" aria-label="Send"><svg class="icon"><use href="#i-send"/></svg></button></form>
@@ -359,19 +359,19 @@
         const has = (re) => re.test(lc);
         const name = p.name;
         if (has(/^(hi|hello|hey|hiya|howdy)\b/)) return { s: 'happy', t: `Hello! I am Fibro, a little fibroblast. Ask me anything about the ${name}.` };
-        if (has(/thank|thanks|cheers|lovely|great/)) return { s: 'happy', t: 'Happy to help! If you would like to try it, add it to your enquiry list and Dr de Villiers will take it from there.' };
-        if (has(MEDICAL)) return { s: 'care', t: 'That is a question for Dr de Villiers rather than me. Anything about your health or medical history is best talked through with her directly.', book: true };
+        if (has(/thank|thanks|cheers|lovely|great/)) return { s: 'happy', t: 'Happy to help! If you would like to try it, add it to your enquiry list and Dr De Villiers will take it from there.' };
+        if (has(MEDICAL)) return { s: 'care', t: 'That is a question for Dr De Villiers rather than me. Anything about your health or medical history is best talked through with her directly.', book: true };
         if (has(/how (do|should|to|often|much)|use|apply|routine|morning|night|evening|when|step|order|layer/) && p.howTo && p.howTo.length) return { s: 'happy', t: 'Here is how it is used. ' + p.howTo.join(' ') };
         if (has(/who|suit|skin|type|dry|oily|dull|sensitiv|good for|help|benefit|why|worth/) && p.goodFor && p.goodFor.length) return { s: 'happy', t: `The ${name} is good for: ${p.goodFor.map((x) => x.charAt(0).toLowerCase() + x.slice(1)).join(', ')}.` };
         if (has(/with|pair|combine|together|goes|alongside|routine|layer/)) {
             const ps = (p.pairs || []).map((x) => byId[x]).filter(Boolean);
             if (ps.length) return { s: 'happy', t: `It works nicely with ${ps.map((x) => x.name).join(' and ')}. You can tap them above to have a look.` };
         }
-        if (has(/ingredient|contain|made of|inside|active|key/)) return p.key ? { s: 'happy', t: `The key ingredients are ${p.key}. Check the full ingredient list on the packaging if you have any sensitivities.` } : { s: 'oops', t: 'I do not have the ingredient list to hand. Dr de Villiers can go through it with you.', book: true };
-        if (has(/price|cost|how much|expensive|euro|€|size|ml|big|last/)) return { s: 'happy', t: `${name}: ${[p.price, p.size].filter(Boolean).join(', ') || 'ask Dr de Villiers for pricing'}.` };
-        if (has(/buy|order|get it|purchase|available|stock|enquir|collect|deliver|ship|pay|apple/)) return { s: 'happy', t: p.link ? 'Tap Buy now and you will pay securely on the next page. Apple Pay and Google Pay work there too.' : 'Tap Add to enquiry, then open your enquiry list and send it. Dr de Villiers will reply to confirm availability and how to pay or collect.' };
+        if (has(/ingredient|contain|made of|inside|active|key/)) return p.key ? { s: 'happy', t: `The key ingredients are ${p.key}. Check the full ingredient list on the packaging if you have any sensitivities.` } : { s: 'oops', t: 'I do not have the ingredient list to hand. Dr De Villiers can go through it with you.', book: true };
+        if (has(/price|cost|how much|expensive|euro|€|size|ml|big|last/)) return { s: 'happy', t: `${name}: ${[p.price, p.size].filter(Boolean).join(', ') || 'ask Dr De Villiers for pricing'}.` };
+        if (has(/buy|order|get it|purchase|available|stock|enquir|collect|deliver|ship|pay|apple/)) return { s: 'happy', t: p.link ? 'Tap Buy now and you will pay securely on the next page. Apple Pay and Google Pay work there too.' : 'Tap Add to enquiry, then open your enquiry list and send it. Dr De Villiers will reply to confirm availability and how to pay or collect.' };
         if (has(/what|about|tell|describe|it\b/) && p.description) return { s: 'happy', t: p.description };
-        return { s: 'oops', t: 'Hmm, I am only a little cell and that one is beyond me. Try one of the questions below, or ask Dr de Villiers.', book: true, chips: true };
+        return { s: 'oops', t: 'Hmm, I am only a little cell and that one is beyond me. Try one of the questions below, or ask Dr De Villiers.', book: true, chips: true };
     };
     const CHIPS = [['What is it?', 'tell me about it'], ['How do I use it?', 'how do i use it'], ['Who is it for?', 'who is it good for'], ['What goes with it?', 'what goes with it'], ['Is it right for me?', 'is it right for my condition']];
 
@@ -397,7 +397,7 @@
                 guide.set(r.s === 'care' ? 'care' : 'happy');
                 const finish = () => {
                     clearInterval(tick); span.textContent = text; skip = null; busy = false;
-                    if (r.book) { const a = document.createElement('a'); a.className = 'inline-link'; a.href = BOOK; a.textContent = 'Ask Dr de Villiers'; typing.appendChild(document.createElement('br')); typing.appendChild(a); }
+                    if (r.book) { const a = document.createElement('a'); a.className = 'inline-link'; a.href = BOOK; a.textContent = 'Ask Dr De Villiers'; typing.appendChild(document.createElement('br')); typing.appendChild(a); }
                     chat.scrollTop = chat.scrollHeight; if (r.s === 'oops') setTimeout(() => guide.set('happy'), 1500); res();
                 };
                 skip = finish;

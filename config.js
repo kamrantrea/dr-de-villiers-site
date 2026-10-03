@@ -10,6 +10,6 @@ window.SITE = {
     instagram:    'drchrisnaaesthetics',       // handle only (blank hides the link)
     address:      '',                          // optional, e.g. 'Unit 3, Main Street, Ballincollig, Co. Cork' (adds a Directions link)
     googleReviews:'',                          // optional link to her Google reviews (adds a link, no quotes shown)
-    introVideo:   '',                          // optional: 'images/intro.mp4' or a YouTube link (adds a Meet Dr de Villiers video)
+    introVideo:   '',                          // optional: 'images/intro.mp4' or a YouTube link (adds a Meet Dr De Villiers video)
     web3formsKey: 'YOUR-WEB3FORMS-ACCESS-KEY'  // free key from web3forms.com (emails enquiries to her)
 };

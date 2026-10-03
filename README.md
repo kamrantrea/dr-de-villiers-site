@@ -1,8 +1,8 @@
-# Dr Chrisna de Villiers - Aesthetic Medicine website
+# Dr Chrisna De Villiers - Aesthetic Medicine website
 
 A fast, single-page static site (plain HTML/CSS/JS, no build step), hosted free on GitHub Pages.
 
-Patients fill in an enquiry form, it is emailed to Dr de Villiers via Web3Forms, and she confirms by reply and books them into Clever Clinic as usual. There is also a WhatsApp button and a Call button.
+Patients fill in an enquiry form, it is emailed to Dr De Villiers via Web3Forms, and she confirms by reply and books them into Clever Clinic as usual. There is also a WhatsApp button and a Call button.
 
 Files: `index.html` (the page), `style.css` (the design, organised as tokens > base > layout > components > sections > responsive), `config.js` (her contact details, the only file she edits), `products.js` (optional shop), `shop.html` + `shop.js` (the shop page), `script.js` (behaviour), `privacy.html` (draft policy), `book.html` (short link that jumps to the booking form), `images/` (photos).
 
@@ -18,7 +18,7 @@ Open `config.js` and edit:
 | `instagram` | Her Instagram handle (optional). Leave empty and the footer link stays hidden |
 | `address` | Optional. Her clinic address; adds a Directions link |
 | `googleReviews` | Optional. Link to her Google reviews; adds a "Read our Google reviews" link (no quotes shown on the site) |
-| `introVideo` | Optional. `images/intro.mp4` (uploaded) or a YouTube link; adds a "Meet Dr de Villiers" video that only loads when played |
+| `introVideo` | Optional. `images/intro.mp4` (uploaded) or a YouTube link; adds a "Meet Dr De Villiers" video that only loads when played |
 | `web3formsKey` | Access key from Web3Forms (step 2) |
 
 Anything left as a placeholder is hidden automatically (no dead Call, WhatsApp or email buttons). Until a real key is added the form runs in demo mode and shows a "not connected yet" message.
@@ -49,7 +49,7 @@ Check these IPs against GitHub's current Pages docs when you do it.
 
 On github.com open the `images` folder, click **Add file > Upload files**, and drop in:
 
-- `hero.jpg` - portrait of Dr de Villiers for the top of the page (portrait orientation)
+- `hero.jpg` - portrait of Dr De Villiers for the top of the page (portrait orientation)
 - `about.jpg` - second photo for the About section
 
 Name them exactly like that. They replace the temporary royalty-free stock images (Unsplash) automatically. Remove the `onerror=` stock fallback in `index.html` once her own photos are in. Use her own photos, ideally under 500 KB each. Good photography is the single biggest thing that makes the site feel premium.
@@ -77,6 +77,6 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 
 ## Selling products
 
-The shop lives at `<site-address>/shop.html`. It is unlisted (`noindex`), so share the link directly. Until she adds real products it shows sample ones with a banner. Each product opens in a sheet with a small scripted guide called Fibro (keyword answers built from the product details she writes; it is not AI and gives no medical advice, and anything health-related is passed to Dr de Villiers). Products without a `link` use an Enquire list that is emailed to her through the same Web3Forms key.
+The shop lives at `<site-address>/shop.html`. It is unlisted (`noindex`), so share the link directly. Until she adds real products it shows sample ones with a banner. Each product opens in a sheet with a small scripted guide called Fibro (keyword answers built from the product details she writes; it is not AI and gives no medical advice, and anything health-related is passed to Dr De Villiers). Products without a `link` use an Enquire list that is emailed to her through the same Web3Forms key.
 
 Open `products.js` and follow the comment at the top: copy one block per product (name, category, price, size, description, how to use, good for, pairs, optional photo and Stripe Payment Link). A Shop link then appears in the main menu automatically; with an empty list the menu has no Shop link. Stripe Payment Links give Apple Pay and Google Pay with no extra work. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.

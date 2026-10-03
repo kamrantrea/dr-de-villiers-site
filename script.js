@@ -14,7 +14,7 @@
         instagram: !!C.instagram,
         googleReviews: !!C.googleReviews
     };
-    const waText = encodeURIComponent('Hi Dr de Villiers, I would like to book an appointment.');
+    const waText = encodeURIComponent('Hi Dr De Villiers, I would like to book an appointment.');
 
     $$('[data-cfg]').forEach((el) => {
         const k = el.dataset.cfg;
@@ -48,7 +48,7 @@
             const media = yt
                 ? Object.assign(document.createElement('iframe'), {
                     src: 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?autoplay=1&rel=0',
-                    allow: 'autoplay; encrypted-media; picture-in-picture', allowFullscreen: true, title: 'Meet Dr de Villiers'
+                    allow: 'autoplay; encrypted-media; picture-in-picture', allowFullscreen: true, title: 'Meet Dr De Villiers'
                 })
                 : Object.assign(document.createElement('video'), { src: C.introVideo, controls: true, autoplay: true, playsInline: true });
             frame.replaceChildren(media);
@@ -233,7 +233,7 @@
         if (form.botcheck.value) return; // spam trap
 
         if (isPlaceholder(C.web3formsKey)) {
-            say('ok', 'Demo mode: the form is not connected yet. Once the Web3Forms key is added in config.js, requests will be emailed straight to Dr de Villiers.');
+            say('ok', 'Demo mode: the form is not connected yet. Once the Web3Forms key is added in config.js, requests will be emailed straight to Dr De Villiers.');
             return;
         }
 

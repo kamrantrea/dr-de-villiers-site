@@ -28,7 +28,7 @@
    },
 
    No link? The product shows Enquire instead: the customer adds it
-   to their list and the request is emailed to Dr de Villiers.
+   to their list and the request is emailed to Dr De Villiers.
    With a link, they can pay straight away (Apple Pay and Google Pay
    work automatically on Stripe pages).
 
