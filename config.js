@@ -8,5 +8,8 @@ window.SITE = {
     phone:        '+353 XX XXX XXXX',          // shown and used for the Call button
     whatsapp:     '353XXXXXXXXX',              // digits only, country code first, no + or spaces
     instagram:    'drchrisnaaesthetics',       // handle only (blank hides the link)
+    address:      '',                          // optional, e.g. 'Unit 3, Main Street, Ballincollig, Co. Cork' (adds a Directions link)
+    googleReviews:'',                          // optional link to her Google reviews (adds a link, no quotes shown)
+    introVideo:   '',                          // optional: 'images/intro.mp4' or a YouTube link (adds a Meet Dr de Villiers video)
     web3formsKey: 'YOUR-WEB3FORMS-ACCESS-KEY'  // free key from web3forms.com (emails enquiries to her)
 };

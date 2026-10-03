@@ -16,6 +16,9 @@ Open `config.js` and edit:
 | `phone` | Phone shown and used for the Call button |
 | `whatsapp` | Digits only with country code, e.g. `353871234567` (no `+`, no spaces) |
 | `instagram` | Her Instagram handle (optional). Leave empty and the footer link stays hidden |
+| `address` | Optional. Her clinic address; adds a Directions link |
+| `googleReviews` | Optional. Link to her Google reviews; adds a "Read our Google reviews" link (no quotes shown on the site) |
+| `introVideo` | Optional. `images/intro.mp4` (uploaded) or a YouTube link; adds a "Meet Dr de Villiers" video that only loads when played |
 | `web3formsKey` | Access key from Web3Forms (step 2) |
 
 Anything left as a placeholder is hidden automatically (no dead Call, WhatsApp or email buttons). Until a real key is added the form runs in demo mode and shows a "not connected yet" message.
@@ -63,6 +66,12 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 - [ ] Set up the professional email on her domain.
 - [ ] Check Irish Medical Council guidance on advertising. Testimonials were deliberately left out because of the Council's restrictions.
 
+## Icons and share image
+
+`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-512.png` and `og-image.png` are already in place. The share image is what shows when the link is sent on WhatsApp or posted on Instagram. In `index.html`, the `og:image` address currently points at the GitHub Pages URL; change it to her real domain once that is live.
+
 ## Selling products
+
+Preview the shop with sample products at `<site-address>/?preview=shop` (nothing shows to the public until she adds real ones). A product with no `link` gets an Enquire button that pre-fills the booking form.
 
 Open `products.js` and follow the comment at the top: create a Stripe Payment Link, paste one block per product, upload the photo. A Shop section and menu link then appear automatically; with an empty list nothing shows. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.

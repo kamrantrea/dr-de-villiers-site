@@ -11,16 +11,19 @@
         email: !isPlaceholder(C.email),
         phone: !isPlaceholder(C.phone),
         whatsapp: !isPlaceholder(C.whatsapp),
-        instagram: !!C.instagram
+        instagram: !!C.instagram,
+        googleReviews: !!C.googleReviews
     };
     const waText = encodeURIComponent('Hi Dr de Villiers, I would like to book an appointment.');
 
     $$('[data-cfg]').forEach((el) => {
         const k = el.dataset.cfg;
-        if (!has[k]) { el.hidden = true; return; }
+        el.hidden = !has[k];
+        if (!has[k]) return;
         if (k === 'email')     { el.href = 'mailto:' + C.email; if (el.dataset.show !== 'false') el.textContent = C.email; }
         if (k === 'phone')     { el.href = 'tel:' + tel;        if (el.dataset.show !== 'false') el.textContent = C.phone; }
         if (k === 'whatsapp')  { el.href = 'https://wa.me/' + C.whatsapp + '?text=' + waText; el.target = '_blank'; el.rel = 'noopener'; }
+        if (k === 'googleReviews') { el.href = C.googleReviews; el.target = '_blank'; el.rel = 'noopener'; }
         if (k === 'instagram') { el.href = 'https://instagram.com/' + C.instagram.replace('@', ''); el.target = '_blank'; el.rel = 'noopener'; }
     });
     // hide list rows / groups whose every contact link is hidden
@@ -28,18 +31,54 @@
         if ($$('[data-cfg]', box).every((a) => a.hidden)) box.hidden = true;
     });
 
+    /* ---------- optional address + directions ---------- */
+    if (C.address) {
+        $('#addressText').textContent = C.address;
+        const dir = $('#dirLink');
+        dir.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(C.address);
+        dir.hidden = false;
+    }
+
+    /* ---------- optional intro video (loads only when played) ---------- */
+    if (C.introVideo) {
+        $('#video').hidden = false;
+        const yt = String(C.introVideo).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+        $('#videoPlay').addEventListener('click', () => {
+            const frame = $('#videoFrame');
+            const media = yt
+                ? Object.assign(document.createElement('iframe'), {
+                    src: 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?autoplay=1&rel=0',
+                    allow: 'autoplay; encrypted-media; picture-in-picture', allowFullscreen: true, title: 'Meet Dr de Villiers'
+                })
+                : Object.assign(document.createElement('video'), { src: C.introVideo, controls: true, autoplay: true, playsInline: true });
+            frame.replaceChildren(media);
+        });
+    }
+
     /* ---------- shop: built from products.js, hidden when empty ---------- */
-    const products = (window.PRODUCTS || []).filter((p) => p && p.name && p.link);
+    const preview = new URLSearchParams(location.search).get('preview') === 'shop';
+    let products = (window.PRODUCTS || []).filter((p) => p && p.name);
+    if (preview && !products.length) {
+        products = [
+            { name: 'Daily SPF 50', price: '\u20ac45', note: 'Lightweight daily protection' },
+            { name: 'Hydrating serum', price: '\u20ac68', note: 'Hyaluronic acid for plump, calm skin' },
+            { name: 'Gentle cleanser', price: '\u20ac32', note: 'Soothing, non-stripping daily cleanse' }
+        ];
+        $('#previewNote').hidden = false;
+    }
     if (products.length) {
         const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const bottle = '<svg class="icon ph"><use href="#i-bottle"/></svg>';
         $('#shopGrid').innerHTML = products.map((p) => `
             <article class="card product">
-                <div class="photo">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">` : ''}</div>
+                <div class="photo">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">` : bottle}</div>
                 <div class="product-body">
                     <h3>${esc(p.name)}</h3>
                     ${p.note ? `<p>${esc(p.note)}</p>` : ''}
                     ${p.price ? `<span class="price">${esc(p.price)}</span>` : ''}
-                    <a class="btn btn-solid btn-sm" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>
+                    ${p.link
+                        ? `<a class="btn btn-solid btn-sm" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>`
+                        : `<a class="btn btn-ghost btn-sm" href="#book" data-treatment="Medical-grade skincare" data-message="I would like to ask about: ${esc(p.name)}">Enquire</a>`}
                 </div>
             </article>`).join('');
         $('#shop').hidden = false;
@@ -65,9 +104,28 @@
     // rotating a phone or resizing the window must never leave the page locked
     desktop.addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+    let lastY = window.scrollY;
+    let run = 0; // pixels scrolled in the current direction
+    const onScroll = () => {
+        const y = window.scrollY;
+        const d = y - lastY;
+        lastY = y;
+        header.classList.toggle('scrolled', y > 24);
+        run = (d > 0) === (run > 0) ? run + d : d;
+        if (header.classList.contains('open')) return;
+        // tuck the header away when reading down, bring it back as soon as they scroll up
+        if (run > 40 && y > 500) header.classList.add('tucked');
+        else if (run < -12 || y < 200) header.classList.remove('tucked');
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---------- photos fade in when ready ---------- */
+    $$('.photo img').forEach((img) => {
+        if (img.complete && img.naturalWidth) return;
+        img.classList.add('fade');
+        img.addEventListener('load', () => img.classList.add('loaded'));
+    });
 
     /* ---------- back to top ---------- */
     const toTop = $('#toTop');
@@ -92,6 +150,7 @@
     const select = $('#treatment');
     $$('a[href="#book"]').forEach((a) => a.addEventListener('click', () => {
         if (a.dataset.treatment) select.value = a.dataset.treatment;
+        if (a.dataset.message) $('#message').value = a.dataset.message;
         // let the smooth scroll finish, then put the cursor in the first field
         setTimeout(() => $('#firstName').focus({ preventScroll: true }), 700);
     }));
@@ -116,6 +175,8 @@
     const statusBox = $('#formStatus');
     const submitBtn = $('#formSubmit');
     const submitLabel = submitBtn.textContent;
+    const sentPanel = $('#sentPanel');
+    $('#sentAgain').addEventListener('click', () => { sentPanel.hidden = true; form.hidden = false; $('#firstName').focus(); });
     const say = (kind, text) => { statusBox.className = 'status ' + kind; statusBox.textContent = text; };
 
     form.addEventListener('submit', async (e) => {
@@ -148,7 +209,11 @@
             });
             const json = await res.json();
             if (!json.success) throw new Error(json.message || 'Failed');
-            say('ok', 'Thank you. Your request has been sent and Dr de Villiers will reply personally to confirm your appointment.');
+            statusBox.className = 'status';
+            $('#sentName').textContent = data.first_name;
+            form.hidden = true;
+            sentPanel.hidden = false;
+            sentPanel.focus();
             form.reset();
         } catch (err) {
             say('err', 'Your request did not send. Please try again' + (has.whatsapp || has.phone ? ', or message or call directly.' : '.'));

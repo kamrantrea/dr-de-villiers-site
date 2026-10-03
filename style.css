@@ -111,6 +111,8 @@
         background: var(--grain), linear-gradient(160deg, var(--rose-light), var(--rose) 60%, var(--gold-light));
     }
     .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .photo img.fade:not(.loaded) { opacity: 0; }
+    .photo img.fade { transition: opacity 0.8s ease; }
 
     /* cards */
     .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: transform 0.4s var(--ease), box-shadow 0.4s, border-color 0.4s; }
@@ -161,8 +163,10 @@
     /* ---- header ---- */
     .site-header {
         position: fixed; inset: 0 0 auto 0; z-index: 1000; height: var(--header-h);
-        display: flex; align-items: center; transition: background 0.35s, box-shadow 0.35s;
+        display: flex; align-items: center;
     }
+    .site-header { transition: background 0.35s, box-shadow 0.35s, transform 0.4s var(--ease); }
+    .site-header.tucked { transform: translateY(-100%); box-shadow: none; }
     .site-header.scrolled { background: rgba(255, 255, 255, 0.94); box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
     /* an open menu must not use backdrop-filter or its fixed panel gets trapped inside the header */
     .site-header.open { background: #fff; box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -344,6 +348,27 @@
     /* ---- gentle reveal (added by script.js only to content below the fold) ---- */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
     .reveal.in { opacity: 1; transform: none; }
+
+    /* ---- shop preview, product placeholder ---- */
+    .preview-note { margin-bottom: 20px; padding: 12px 16px; background: var(--rose-light); border-left: 3px solid var(--gold); font-size: 0.85rem; }
+    .photo .ph { position: absolute; inset: 0; margin: auto; width: 44px; height: 44px; color: var(--gold-dark); opacity: 0.55; stroke-width: 1.2; }
+
+    /* ---- intro video ---- */
+    .video-frame { position: relative; max-width: 900px; margin-inline: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+    .video-frame iframe, .video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+    .video-play { position: absolute; inset: 0; margin: auto; width: 84px; height: 84px; display: grid; place-items: center; background: #fff; color: var(--charcoal); border: 0; border-radius: 50%; box-shadow: var(--shadow-md); cursor: pointer; transition: transform 0.3s var(--ease), background 0.3s, color 0.3s; }
+    .video-play .icon { width: 30px; height: 30px; fill: currentColor; stroke: none; margin-left: 4px; }
+    .video-play:hover { transform: scale(1.06); background: var(--charcoal); color: #fff; }
+
+    /* ---- small extras ---- */
+    .dir { margin-left: 10px; font-size: 0.85rem; font-weight: 500; color: var(--gold-dark); }
+    .reviews-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; font-weight: 500; color: var(--gold-dark); }
+    .reviews-link .icon { width: 18px; height: 18px; }
+    .sent { text-align: center; padding-block: clamp(40px, 6vw, 72px); }
+    .sent .icon-disc { margin: 0 auto 20px; background: var(--rose-light); }
+    .sent h3 { font-size: 2rem; font-weight: 500; margin-bottom: 10px; }
+    .sent p { max-width: 28em; margin: 0 auto 28px; color: var(--charcoal-soft); }
+    .sent:focus { outline: none; }
 
     /* ---- footer ---- */
     .site-footer { background: var(--charcoal); color: rgba(255, 255, 255, 0.7); padding: 72px 0 32px; }
