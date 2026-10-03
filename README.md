@@ -4,7 +4,7 @@ A fast, single-page static site (plain HTML/CSS/JS, no build step), hosted free 
 
 Patients fill in an enquiry form, it is emailed to Dr de Villiers via Web3Forms, and she confirms by reply and books them into Clever Clinic as usual. There is also a WhatsApp button and a Call button.
 
-Files: `index.html` (the page), `style.css` (the design, organised as tokens > base > layout > components > sections > responsive), `config.js` (her contact details, the only file she edits), `products.js` (optional shop), `script.js` (behaviour), `privacy.html` (draft policy), `book.html` (short link that jumps to the booking form), `images/` (photos).
+Files: `index.html` (the page), `style.css` (the design, organised as tokens > base > layout > components > sections > responsive), `config.js` (her contact details, the only file she edits), `products.js` (optional shop), `shop.html` + `shop.js` (the shop page), `script.js` (behaviour), `privacy.html` (draft policy), `book.html` (short link that jumps to the booking form), `images/` (photos).
 
 ## 1. Fill in the details (config.js)
 
@@ -69,7 +69,7 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 ## Unlisted pages (share by link)
 
 - `collagen.html`: an interactive guide to how skin builds collagen. The skin picture stays pinned while you scroll four short steps, with a timeline slider, tappable cells and a little character, Fibro the fibroblast, whose face changes at each stage. It is not linked from the home page and is marked `noindex` so Google does not list it. Share the link directly, for example in an Instagram story. To make it public later, add a link to it on the home page and delete the `noindex` line in `collagen.html`.
-- `index.html?preview=shop`: the shop with sample products.
+- `shop.html`: the skincare shop (unlisted, share the link). With no products added it shows clearly marked sample products and nothing is sent.
 
 ## Icons and share image
 
@@ -77,6 +77,6 @@ Use `https://<site-address>/book.html` as her bio link. It jumps straight to the
 
 ## Selling products
 
-Preview the shop with sample products at `<site-address>/?preview=shop` (nothing shows to the public until she adds real ones). A product with no `link` gets an Enquire button that pre-fills the booking form.
+The shop lives at `<site-address>/shop.html`. It is unlisted (`noindex`), so share the link directly. Until she adds real products it shows sample ones with a banner. Each product opens in a sheet with a small scripted guide called Fibro (keyword answers built from the product details she writes; it is not AI and gives no medical advice, and anything health-related is passed to Dr de Villiers). Products without a `link` use an Enquire list that is emailed to her through the same Web3Forms key.
 
-Open `products.js` and follow the comment at the top: create a Stripe Payment Link, paste one block per product, upload the photo. A Shop section and menu link then appear automatically; with an empty list nothing shows. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.
+Open `products.js` and follow the comment at the top: copy one block per product (name, category, price, size, description, how to use, good for, pairs, optional photo and Stripe Payment Link). A Shop link then appears in the main menu automatically; with an empty list the menu has no Shop link. Stripe Payment Links give Apple Pay and Google Pay with no extra work. Only list skincare and cosmetics; prescription-only medicines (including anti-wrinkle injectables) cannot be advertised or sold online in Ireland.

@@ -55,35 +55,8 @@
         });
     }
 
-    /* ---------- shop: built from products.js, hidden when empty ---------- */
-    const preview = new URLSearchParams(location.search).get('preview') === 'shop';
-    let products = (window.PRODUCTS || []).filter((p) => p && p.name);
-    if (preview && !products.length) {
-        products = [
-            { name: 'Daily SPF 50', price: '\u20ac45', note: 'Lightweight daily protection' },
-            { name: 'Hydrating serum', price: '\u20ac68', note: 'Hyaluronic acid for plump, calm skin' },
-            { name: 'Gentle cleanser', price: '\u20ac32', note: 'Soothing, non-stripping daily cleanse' }
-        ];
-        $('#previewNote').hidden = false;
-    }
-    if (products.length) {
-        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-        const bottle = '<svg class="icon ph"><use href="#i-bottle"/></svg>';
-        $('#shopGrid').innerHTML = products.map((p) => `
-            <article class="card product">
-                <div class="photo">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">` : bottle}</div>
-                <div class="product-body">
-                    <h3>${esc(p.name)}</h3>
-                    ${p.note ? `<p>${esc(p.note)}</p>` : ''}
-                    ${p.price ? `<span class="price">${esc(p.price)}</span>` : ''}
-                    ${p.link
-                        ? `<a class="btn btn-solid btn-sm" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>`
-                        : `<a class="btn btn-ghost btn-sm" href="#book" data-treatment="Medical-grade skincare" data-message="I would like to ask about: ${esc(p.name)}">Enquire</a>`}
-                </div>
-            </article>`).join('');
-        $('#shop').hidden = false;
-        $$('[data-shop-link]').forEach((li) => { li.hidden = false; });
-    }
+    /* ---------- Shop link: appears in the menu only once real products exist ---------- */
+    if ((window.PRODUCTS || []).some((p) => p && p.name)) $$('[data-shop-link]').forEach((li) => { li.hidden = false; });
 
     /* ---------- header + mobile menu ---------- */
     const header = $('#siteHeader');
@@ -104,6 +77,7 @@
     // rotating a phone or resizing the window must never leave the page locked
     desktop.addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
+    let anchoring = false; // true while a menu/anchor jump is scrolling, so the header stays put
     let lastY = window.scrollY;
     let run = 0; // pixels scrolled in the current direction
     const onScroll = () => {
@@ -112,13 +86,85 @@
         lastY = y;
         header.classList.toggle('scrolled', y > 24);
         run = (d > 0) === (run > 0) ? run + d : d;
-        if (header.classList.contains('open')) return;
+        if (header.classList.contains('open') || anchoring) return;
         // tuck the header away when reading down, bring it back as soon as they scroll up
         if (run > 40 && y > 500) header.classList.add('tucked');
         else if (run < -12 || y < 200) header.classList.remove('tucked');
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---------- anchor links: land on the heading, every time ---------- */
+    const GAP = 28;
+    const landing = (el) => {
+        if (el.id === 'top') return 0;
+        const first = el.querySelector('.wrap > *') || el;
+        const hh = header.getBoundingClientRect().height || 76;
+        return Math.max(0, first.getBoundingClientRect().top + window.scrollY - hh - GAP);
+    };
+    let animId = 0;
+    const goTo = (el, instant) => new Promise((done) => {
+        const id = ++animId;
+        const root = document.documentElement;
+        header.classList.remove('tucked');
+        anchoring = true; run = 0;
+        root.style.scrollBehavior = 'auto';
+        let cancelled = false;
+        const finish = () => { root.style.scrollBehavior = ''; lastY = window.scrollY; run = 0; anchoring = false; cleanup(); done(); };
+        const stop = () => { cancelled = true; };
+        const cleanup = () => ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach((t) => window.removeEventListener(t, stop));
+        ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach((t) => window.addEventListener(t, stop, { passive: true }));
+        const from = window.scrollY;
+        const t0 = performance.now();
+        const dur = instant || reduceMotion ? 0 : Math.min(1100, 450 + Math.abs(landing(el) - from) * 0.25);
+        let settled = 0;
+        const step = (now) => {
+            if (id !== animId) { cleanup(); done(); return; }      // a newer jump took over
+            if (cancelled) { finish(); return; }                   // the person grabbed the scroll themselves
+            const target = landing(el);                            // re-measured each frame, so late layout shifts cannot throw it off
+            const k = dur ? Math.min(1, (now - t0) / dur) : 1;
+            const e = 1 - Math.pow(1 - k, 3);
+            const y = k < 1 ? from + (target - from) * e : target;
+            window.scrollTo(0, y);
+            if (k >= 1 && Math.abs(window.scrollY - target) < 1.5) settled++; else settled = 0;
+            if (settled >= 8 || now - t0 > dur + 1500) { finish(); return; } // hold for a few frames so images and fonts finishing late are absorbed
+            requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    });
+    const hashTarget = (h) => { try { return h.length > 1 ? document.getElementById(decodeURIComponent(h.slice(1))) : null; } catch (e) { return null; } };
+    document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        const el = hashTarget(a.getAttribute('href'));
+        if (!el) return;
+        e.preventDefault();
+        history.pushState(null, '', a.getAttribute('href'));
+        // wait one frame so a closing mobile menu has released the scroll lock
+        requestAnimationFrame(() => goTo(el).then(() => {
+            if (el.id === 'book' && a.matches('a[href="#book"]')) $('#firstName').focus({ preventScroll: true });
+        }));
+    });
+    window.addEventListener('popstate', () => { const el = hashTarget(location.hash); if (el) goTo(el); else if (!location.hash) goTo($('#top')); });
+    // arriving with #book in the address (from another page), or fonts changing the layout: align once everything has settled
+    if (hashTarget(location.hash)) {
+        const el = hashTarget(location.hash);
+        const align = () => goTo(el, true);
+        if (document.readyState === 'complete') align(); else window.addEventListener('load', align, { once: true });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
+    }
+
+    /* ---------- which section is on screen (underlines its menu link) ---------- */
+    if ('IntersectionObserver' in window) {
+        const links = new Map($$('.nav a[href^="#"]:not(.btn)').map((a) => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver((entries) => entries.forEach((en) => {
+            const a = links.get(en.target.id);
+            if (!a) return;
+            if (en.isIntersecting) { links.forEach((x) => x.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+            else if (a.getAttribute('aria-current')) a.removeAttribute('aria-current');
+        }), { rootMargin: '-35% 0px -60% 0px' });
+        links.forEach((a, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+    }
 
     /* ---------- photos fade in when ready ---------- */
     $$('.photo img').forEach((img) => {
@@ -140,7 +186,7 @@
         const io = new IntersectionObserver((entries) => entries.forEach((en) => {
             if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
         }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-        $$('.head, .about-copy, .about-media, .creds li, .path li, .treat, .pillar, .quote, .step, .faq, .cta .wrap > *, .book-copy, .book-form, .product').forEach((el) => {
+        $$('.head, .about-copy, .about-media, .creds li, .path li, .treat, .pillar, .quote, .step, .faq, .cta .wrap > *, .book-copy, .book-form').forEach((el) => {
             if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('reveal'); io.observe(el); }
         });
     }
@@ -151,8 +197,6 @@
     $$('a[href="#book"]').forEach((a) => a.addEventListener('click', () => {
         if (a.dataset.treatment) select.value = a.dataset.treatment;
         if (a.dataset.message) $('#message').value = a.dataset.message;
-        // let the smooth scroll finish, then put the cursor in the first field
-        setTimeout(() => $('#firstName').focus({ preventScroll: true }), 700);
     }));
 
     // links from other pages can pre-select a treatment: index.html?treatment=Biostimulators#book
