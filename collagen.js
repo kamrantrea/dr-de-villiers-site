@@ -39,7 +39,7 @@
     const sToT = (s) => { const k = clamp(s) * 3, i = Math.min(2, Math.floor(k)); return lerp(ANCH[i], ANCH[i + 1], k - i); };
     const tToS = (t) => { let i = 0; while (i < 2 && t > ANCH[i + 1]) i++; return (i + (t - ANCH[i]) / (ANCH[i + 1] - ANCH[i])) / 3; };
     const stageOf = (t) => (t < 0.06 ? 0 : t < 0.35 ? 1 : t < 0.8 ? 2 : 3);
-    const STAGE_NAMES = ['Before', 'Treatment day', 'Weeks later', 'Months later'];
+    const STAGE_NAMES = ['Before', 'Treatment Day', 'Weeks Later', 'Months Later'];
 
     /* ---------- skin scene ---------- */
     const defs = el('defs', {}, svg);
@@ -298,8 +298,9 @@
 
     /* ---------- moving through time ---------- */
     let raf = 0;
+    let follow = 0;
     const tween = (to, ms) => {
-        cancelAnimationFrame(raf);
+        cancelAnimationFrame(raf); cancelAnimationFrame(follow); follow = 0;
         const from = t;
         if (reduce || ms <= 0) { render(to); return; }
         const start = performance.now();
@@ -313,15 +314,16 @@
     let touched = false;
     const touch = () => { if (!touched) { touched = true; $$('.ring').forEach((r) => r.classList.add('gone')); } };
 
-    slider.addEventListener('input', () => { cancelAnimationFrame(raf); render(sToT(slider.value / 100)); touch(); });
+    slider.addEventListener('input', () => { cancelAnimationFrame(raf); cancelAnimationFrame(follow); follow = 0; holdFor(1600); render(sToT(slider.value / 100)); touch(); });
     ticks.forEach((b) => b.addEventListener('click', () => {
         const i = +b.dataset.stage;
         touch();
+        holdFor(1500);
         tween(ANCH[i], 1000);
         alignBeat(i); // bring the matching text into view too
     }));
     // when the slider is released, bring the matching text into view
-    slider.addEventListener('change', () => alignBeat(stageOf(t)));
+    slider.addEventListener('change', () => { holdFor(1500); alignBeat(stageOf(t)); });
 
     // scrolling the story moves time forward and back
     const single = window.matchMedia('(max-width: 960px)');
@@ -330,22 +332,38 @@
         const r = beats[i].getBoundingClientRect();
         window.scrollBy({ top: (r.top + r.bottom) / 2 - refLine(), behavior: reduce ? 'auto' : 'smooth' });
     };
-    let ticking = false, beatNow = 0;
-    const onScroll = () => {
-        if (ticking) return;
+    // scrolling scrubs time smoothly: the picture follows your finger between the four stages
+    let hold = 0; // button and slider jumps drive time themselves, so scrubbing pauses briefly after them
+    const holdFor = (ms) => { hold = performance.now() + ms; setTimeout(() => onScroll(), ms + 40); };
+    const scrubTarget = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        if (scrollY >= max - 4) return 1;
+        const ref = refLine();
+        const c = beats.map((b) => { const r = b.getBoundingClientRect(); return (r.top + r.bottom) / 2; });
+        if (ref <= c[0]) return 0;
+        for (let i = 0; i < 3; i++) if (ref < c[i + 1]) return lerp(ANCH[i], ANCH[i + 1], ease((ref - c[i]) / (c[i + 1] - c[i])));
+        return 1;
+    };
+    let goal = 0;
+    const chase = () => {
+        const d = goal - t;
+        if (Math.abs(d) < 0.0008) { render(goal); follow = 0; return; }
+        render(t + d * 0.22);
+        follow = requestAnimationFrame(chase);
+    };
+    let ticking = false;
+    function onScroll() {
+        if (ticking || performance.now() < hold) return;
         ticking = true;
         requestAnimationFrame(() => {
             ticking = false;
-            const ref = refLine();
-            let best = 0, bd = Infinity;
-            beats.forEach((b, i) => {
-                const r = b.getBoundingClientRect();
-                const d = Math.abs((r.top + r.bottom) / 2 - ref);
-                if (d < bd) { bd = d; best = i; }
-            });
-            if (best !== beatNow) { beatNow = best; tween(ANCH[best], 1100); }
+            if (performance.now() < hold) return;
+            goal = scrubTarget();
+            cancelAnimationFrame(raf);
+            if (reduce) { render(goal); return; }
+            if (!follow) follow = requestAnimationFrame(chase);
         });
-    };
+    }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
 
@@ -393,4 +411,5 @@
     });
 
     render(0);
+    onScroll();
 })();

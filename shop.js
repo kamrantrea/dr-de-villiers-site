@@ -16,14 +16,14 @@
 
     /* ---------- products ---------- */
     const SAMPLE = [
-        { id: 'cleanser', name: 'Gentle gel cleanser', category: 'Cleanse', price: '€32', size: '150 ml', shape: 'pump', tint: 'sage',
+        { id: 'cleanser', name: 'Gentle Gel Cleanser', category: 'Cleanse', price: '€32', size: '150 ml', shape: 'pump', tint: 'sage',
           note: 'A soft, non-stripping daily cleanse',
           description: 'A mild gel that lifts away make-up, sunscreen and the day without leaving skin tight. A good first step for every routine, morning or night.',
           key: 'Glycerin, panthenol, aloe',
           howTo: ['Massage a pump onto damp skin for 30 seconds.', 'Rinse with lukewarm water and pat dry.', 'Use morning and evening.'],
           goodFor: ['Every skin type', 'Skin that feels tight after washing', 'Removing sunscreen at night'],
           pairs: ['serum', 'spf'] },
-        { id: 'serum', name: 'Hydrating serum', category: 'Hydrate', price: '€68', size: '30 ml', shape: 'dropper', tint: 'rose', badge: 'Doctor’s pick',
+        { id: 'serum', name: 'Hydrating Serum', category: 'Hydrate', price: '€68', size: '30 ml', shape: 'dropper', tint: 'rose', badge: 'Doctor’s pick',
           note: 'Hyaluronic acid for plump, calm skin',
           description: 'A light, water-based serum that draws moisture into the skin and leaves it looking fresh and bouncy. It layers easily under moisturiser and sunscreen.',
           key: 'Hyaluronic acid, panthenol, glycerin',
@@ -37,21 +37,21 @@
           howTo: ['Apply generously as the last step of your morning routine.', 'Reapply every two hours in strong sun, and after swimming.', 'Use every day, including cloudy ones.'],
           goodFor: ['Everyday protection', 'Wearing under make-up', 'Protecting results after treatments'],
           pairs: ['cleanser', 'vitc'] },
-        { id: 'barrier', name: 'Barrier repair cream', category: 'Hydrate', price: '€54', size: '50 ml', shape: 'jar', tint: 'gold',
+        { id: 'barrier', name: 'Barrier Repair Cream', category: 'Hydrate', price: '€54', size: '50 ml', shape: 'jar', tint: 'gold',
           note: 'Rich comfort for dry, tired skin',
           description: 'A cushioning cream that helps skin hold on to moisture and feel comfortable again. Lovely at night, or morning and night in the colder months.',
           key: 'Ceramides, squalane, shea butter',
           howTo: ['Warm a pea-sized amount between your fingers.', 'Press over the face and neck as the final step at night.', 'Use morning too if skin is very dry.'],
           goodFor: ['Dry or tight skin', 'Winter and central heating', 'Skin that feels easily irritated'],
           pairs: ['serum', 'cleanser'] },
-        { id: 'vitc', name: 'Vitamin C serum', category: 'Treat', price: '€72', size: '30 ml', shape: 'dropper', tint: 'gold', badge: 'New',
+        { id: 'vitc', name: 'Vitamin C Serum', category: 'Treat', price: '€72', size: '30 ml', shape: 'dropper', tint: 'gold', badge: 'New',
           note: 'A daily boost for brighter-looking skin',
           description: 'A stable vitamin C serum for a fresher, more even-looking complexion. Best used in the morning under sunscreen, where it works with your daily protection.',
           key: 'Vitamin C, vitamin E, ferulic acid',
           howTo: ['Apply a few drops to clean skin in the morning.', 'Let it settle for a minute, then add moisturiser and sunscreen.', 'If your skin tingles or stings, use it every second day.'],
           goodFor: ['Dull or uneven-looking skin', 'Morning routines', 'Adding to sunscreen'],
           pairs: ['spf', 'serum'] },
-        { id: 'night', name: 'Renewal night cream', category: 'Treat', price: '€78', size: '50 ml', shape: 'jar', tint: 'rose',
+        { id: 'night', name: 'Renewal Night Cream', category: 'Treat', price: '€78', size: '50 ml', shape: 'jar', tint: 'rose',
           note: 'A richer cream for the evening',
           description: 'A nourishing night cream that supports your skin’s natural overnight renewal, so it looks smoother and feels softer by morning.',
           key: 'Peptides, squalane, glycerin',
@@ -178,7 +178,7 @@
                 <span class="pinfo"><span class="pcat">${esc(p.category || '')}${p.size ? ' · ' + esc(p.size) : ''}</span><span class="pname">${esc(p.name)}</span>${p.note ? `<span class="pnote">${esc(p.note)}</span>` : ''}</span>
             </button>
             <div class="pfoot">${p.price ? `<span class="price">${esc(p.price)}</span>` : '<span></span>'}
-                ${p.link ? `<a class="btn btn-solid btn-sm" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>`
+                ${p.link ? `<a class="btn btn-solid btn-sm" href="${esc(p.link)}" target="_blank" rel="noopener">Buy Now</a>`
                          : `<button class="btn btn-ghost btn-sm" type="button" data-add="${esc(p.id)}">Enquire</button>`}</div>
         </article>`;
     const render = () => {
@@ -195,7 +195,7 @@
     });
     q.addEventListener('input', render);
     document.addEventListener('keydown', (e) => { if (e.key === '/' && !openDrawer && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); q.focus(); } });
-    q.placeholder = 'Search products  ( / )';
+    q.placeholder = 'Search Products  ( / )';
     $('#clearFilters').addEventListener('click', () => { q.value = ''; cat = 'All'; $$('.cat', cats).forEach((x) => { const on = x.dataset.cat === 'All'; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); }); render(); });
     render();
 
@@ -319,18 +319,18 @@
                     ${p.price ? `<div class="price big">${esc(p.price)}</div>` : ''}
                     ${p.description ? `<p>${esc(p.description)}</p>` : ''}
                     <div class="p-actions">
-                        ${p.link ? `<a class="btn btn-solid" href="${esc(p.link)}" target="_blank" rel="noopener">Buy now</a>` : ''}
-                        <button class="btn ${p.link ? 'btn-ghost' : 'btn-solid'}" type="button" id="addBtn"><svg class="icon"><use href="#i-plus"/></svg><span>Add to enquiry</span></button>
+                        ${p.link ? `<a class="btn btn-solid" href="${esc(p.link)}" target="_blank" rel="noopener">Buy Now</a>` : ''}
+                        <button class="btn ${p.link ? 'btn-ghost' : 'btn-solid'}" type="button" id="addBtn"><svg class="icon"><use href="#i-plus"/></svg><span>Add to Enquiry</span></button>
                     </div>
                     <p class="fine" id="addNote">${p.link ? 'Pay securely on the next page. Apple Pay and Google Pay are supported.' : 'No payment now. Dr De Villiers will reply by email to confirm.'}</p>
                 </div>
             </div>
             ${p.howTo && p.howTo.length || p.goodFor && p.goodFor.length || p.key ? `<div class="p-details">
-                ${p.howTo && p.howTo.length ? `<div><h3>How to use it</h3>${ul(p.howTo)}</div>` : ''}
-                ${p.goodFor && p.goodFor.length ? `<div><h3>Good for</h3>${ul(p.goodFor)}</div>` : ''}
-                ${p.key ? `<div><h3>Key ingredients</h3><p>${esc(p.key)}</p></div>` : ''}
+                ${p.howTo && p.howTo.length ? `<div><h3>How to Use It</h3>${ul(p.howTo)}</div>` : ''}
+                ${p.goodFor && p.goodFor.length ? `<div><h3>Good For</h3>${ul(p.goodFor)}</div>` : ''}
+                ${p.key ? `<div><h3>Key Ingredients</h3><p>${esc(p.key)}</p></div>` : ''}
             </div>` : ''}
-            ${pairs.length ? `<div class="p-pairs"><h3>Goes well with</h3><div>${pairs.map((x) => `<button type="button" class="pair" data-open="${esc(x.id)}">${esc(x.name)}</button>`).join('')}</div></div>` : ''}
+            ${pairs.length ? `<div class="p-pairs"><h3>Goes Well With</h3><div>${pairs.map((x) => `<button type="button" class="pair" data-open="${esc(x.id)}">${esc(x.name)}</button>`).join('')}</div></div>` : ''}
             <section class="guide" aria-label="Ask Fibro about this product">
                 <div class="guide-head"><a class="g-av" id="gAv" href="collagen.html" aria-label="Meet Fibro: see how your skin builds collagen" title="See how Fibro builds collagen"></a><div><b>Ask Fibro</b><span>Quick answers from Dr De Villiers’ notes. A scripted guide, not medical advice.</span></div></div>
                 <div class="chat" id="chat" role="log" aria-live="polite"></div>
@@ -340,7 +340,7 @@
         $('#addBtn').addEventListener('click', () => {
             add(p.id);
             $('#addNote').textContent = 'Added. Open your enquiry list to send it, or keep browsing.';
-            const sp = $('#addBtn span'); sp.textContent = 'Added'; setTimeout(() => { if (sp) sp.textContent = 'Add one more'; }, 1400);
+            const sp = $('#addBtn span'); sp.textContent = 'Added'; setTimeout(() => { if (sp) sp.textContent = 'Add One More'; }, 1400);
         });
         sheetBody.scrollTop = 0;
         if (openDrawer !== sheet) show(sheet);
@@ -355,7 +355,7 @@
     sheetBody.addEventListener('click', (e) => { const b = e.target.closest('[data-open]'); if (b) open(b.dataset.open); });
 
     /* ---------- the guide: scripted replies built from the product data ---------- */
-    const BOOK = 'index.html?treatment=Medical-grade%20skincare#book';
+    const BOOK = 'index.html?treatment=Medical-Grade%20Skincare#book';
     const MEDICAL = /pregnan|breastfeed|prescri|medicat|medicine|allerg|rash|eczema|rosacea|psoria|acne|infect|reaction|burn|pain|swell|cancer|mole|roaccutane|isotretinoin|retin|diagnos|condition|doctor|dr\b|treat(ment)? (me|my)|botox|filler|wrinkle|inject/;
     const reply = (p, text) => {
         const lc = text.toLowerCase();
@@ -376,7 +376,7 @@
         if (has(/what|about|tell|describe|it\b/) && p.description) return { s: 'happy', t: p.description };
         return { s: 'oops', t: 'Hmm, I am only a little cell and that one is beyond me. Try one of the questions below, or ask Dr De Villiers.', book: true, chips: true };
     };
-    const CHIPS = [['What is it?', 'tell me about it'], ['How do I use it?', 'how do i use it'], ['Who is it for?', 'who is it good for'], ['What goes with it?', 'what goes with it'], ['Is it right for me?', 'is it right for my condition']];
+    const CHIPS = [['What Is It?', 'tell me about it'], ['How Do I Use It?', 'how do i use it'], ['Who Is It For?', 'who is it good for'], ['What Goes With It?', 'what goes with it'], ['Is It Right for Me?', 'is it right for my condition']];
 
     function startGuide(p) {
         const chat = $('#chat'), qc = $('#qchips'), ask = $('#ask'), inp = $('#askIn');

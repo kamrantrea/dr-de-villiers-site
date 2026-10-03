@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skincare shop | Dr Chrisna De Villiers</title>
+    <title>Skincare Shop | Dr Chrisna De Villiers</title>
     <meta name="description" content="Skincare chosen by Dr Chrisna De Villiers, Ballincollig, Cork. Browse, ask Fibro about a product, and enquire.">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#faf6f1">
     <!-- Unlisted for now: remove this line when she wants Google to list the shop -->
     <meta name="robots" content="noindex">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Skincare shop | Dr Chrisna De Villiers">
+    <meta property="og:title" content="Skincare Shop | Dr Chrisna De Villiers">
     <meta property="og:description" content="Skincare chosen by Dr De Villiers. Ask Fibro about any product.">
     <meta property="og:image" content="https://kamrantrea.github.io/dr-de-villiers-site/og-image.png">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preload" href="fonts/montserrat.woff" as="font" type="font/woff" crossorigin>
     <link rel="preload" href="fonts/cormorant.woff" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="style.css?v=1791043912">
+    <link rel="stylesheet" href="style.css?v=1791044235">
 </head>
 <body class="shop-page">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -35,7 +35,7 @@
 <a class="skip" href="#grid">Skip to products</a>
 <header class="site-header scrolled" id="siteHeader">
     <div class="wrap header-row">
-        <a class="wordmark" href="index.html#top" aria-label="Dr Chrisna De Villiers, home"><b>Dr Chrisna De Villiers</b><small>Aesthetic medicine</small></a>
+        <a class="wordmark" href="index.html#top" aria-label="Dr Chrisna De Villiers, home"><b>Dr Chrisna De Villiers</b><small>Aesthetic Medicine</small></a>
         <div class="header-actions">
             <a class="back" href="index.html">Back to site</a>
             <button class="basket-btn" id="basketBtn" type="button" aria-haspopup="dialog">
@@ -49,8 +49,8 @@
     <section class="shop-hero">
         <div class="wrap shop-hero-grid">
             <div>
-                <span class="kicker">The skincare shop</span>
-                <h1>Skincare, chosen by <em>Dr De Villiers</em></h1>
+                <span class="kicker">The Skincare Shop</span>
+                <h1>Skincare, Chosen by <em>Dr De Villiers</em></h1>
                 <p>The products she trusts for daily care between treatments. Open anything to see how it is used, and ask Fibro if you want a hand choosing.</p>
             </div>
             <a class="hero-fibro" id="heroFibro" href="collagen.html" aria-label="Meet Fibro: see how your skin builds collagen">
@@ -62,13 +62,13 @@
 
     <section class="shop-main">
         <div class="wrap">
-            <p class="preview-note" id="sampleNote" hidden><b>Sample products.</b> Nothing here is for sale yet. This is a preview of how the shop will look once Dr De Villiers adds her own range.</p>
+            <p class="preview-note" id="sampleNote" hidden><b>Sample Products.</b> Nothing here is for sale yet. This is a preview of how the shop will look once Dr De Villiers adds her own range.</p>
 
             <div class="toolbar">
                 <div class="cat-chips" id="cats" role="group" aria-label="Filter by step"></div>
                 <label class="search" for="q">
                     <svg class="icon"><use href="#i-search"/></svg>
-                    <span class="sr">Search products</span>
+                    <span class="sr">Search Products</span>
                     <input id="q" type="search" placeholder="Search products" autocomplete="off">
                 </label>
             </div>
@@ -78,10 +78,10 @@
 
             <div class="shop-help">
                 <div>
-                    <h2>Not sure where to start?</h2>
+                    <h2>Not Sure Where to Start?</h2>
                     <p>Choosing skincare is easier with a conversation. Dr De Villiers can recommend a routine for your skin at a consultation.</p>
                 </div>
-                <a class="btn btn-solid" href="index.html?treatment=Medical-grade%20skincare#book">Book a consultation</a>
+                <a class="btn btn-solid" href="index.html?treatment=Medical-Grade%20Skincare#book">Book a Consultation</a>
             </div>
         </div>
     </section>
@@ -123,35 +123,35 @@
     <div class="panel" role="dialog" aria-modal="true" aria-labelledby="bTitle" tabindex="-1">
         <button class="x" type="button" data-close aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
         <div class="panel-scroll">
-            <h2 id="bTitle">Your enquiry list</h2>
+            <h2 id="bTitle">Your Enquiry List</h2>
             <p class="lead" id="bLead">Add the products you are interested in and send the list to Dr De Villiers. No payment is taken here. She will reply to confirm availability and how to collect or pay.</p>
             <ul class="b-items" id="bItems"></ul>
             <p class="empty" id="bEmpty">Your list is empty. Open a product and choose Add to enquiry.</p>
             <form id="bForm" novalidate>
                 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="botcheck" tabindex="-1" autocomplete="off"></label></div>
                 <div class="form-grid">
-                    <div class="field span2"><label for="bName">Your name</label><input class="control" id="bName" name="name" type="text" required autocomplete="name"></div>
+                    <div class="field span2"><label for="bName">Your Name</label><input class="control" id="bName" name="name" type="text" required autocomplete="name"></div>
                     <div class="field"><label for="bEmail">Email</label><input class="control" id="bEmail" name="email" type="email" required autocomplete="email" inputmode="email"></div>
                     <div class="field"><label for="bPhone">Phone <span class="opt">(optional)</span></label><input class="control" id="bPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
-                    <div class="field span2"><label for="bMsg">Anything to add <span class="opt">(optional)</span></label><textarea class="control" id="bMsg" name="message"></textarea></div>
-                    <label class="consent span2"><input type="checkbox" id="bConsent" required><span>I agree to my details being used to respond to this enquiry. Read the <a href="privacy.html">privacy policy</a>.</span></label>
+                    <div class="field span2"><label for="bMsg">Anything to Add <span class="opt">(optional)</span></label><textarea class="control" id="bMsg" name="message"></textarea></div>
+                    <label class="consent span2"><input type="checkbox" id="bConsent" required><span>I agree to my details being used to respond to this enquiry. Read the <a href="privacy.html">Privacy Policy</a>.</span></label>
                     <div class="status span2" id="bStatus" role="status" aria-live="polite"></div>
-                    <div class="span2"><button class="btn btn-solid" type="submit" id="bSubmit" style="width:100%">Send enquiry</button></div>
+                    <div class="span2"><button class="btn btn-solid" type="submit" id="bSubmit" style="width:100%">Send Enquiry</button></div>
                 </div>
             </form>
             <div class="sent" id="bSent" hidden tabindex="-1">
                 <span class="icon-disc"><svg class="icon"><use href="#i-check"/></svg></span>
-                <h3>Thank you, <span id="bSentName"></span></h3>
+                <h3>Thank You, <span id="bSentName"></span></h3>
                 <p>Your enquiry has been sent. Dr De Villiers will reply personally.</p>
-                <button class="btn btn-ghost" type="button" data-close>Keep browsing</button>
+                <button class="btn btn-ghost" type="button" data-close>Keep Browsing</button>
             </div>
         </div>
     </div>
 </div>
 
-<script src="config.js?v=1791043912"></script>
-<script src="products.js?v=1791043912"></script>
-<script src="shop.js?v=1791043912" defer></script>
-<script src="polish.js?v=1791043912" defer></script>
+<script src="config.js?v=1791044235"></script>
+<script src="products.js?v=1791044235"></script>
+<script src="shop.js?v=1791044235" defer></script>
+<script src="polish.js?v=1791044235" defer></script>
 </body>
 </html>
