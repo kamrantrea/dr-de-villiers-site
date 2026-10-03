@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr Chrisna de Villiers | Aesthetic Medicine</title>
-    <meta name="description" content="Medically-led aesthetic treatments in Ireland by IMC-registered doctor Dr Chrisna de Villiers. Anti-wrinkle injections, dermal fillers, biostimulators and medical-grade skincare.">
+    <meta name="description" content="Medically-led aesthetic treatments in Ballincollig, Cork by IMC-registered doctor Dr Chrisna de Villiers. Anti-wrinkle injections, dermal fillers, biostimulators and medical-grade skincare.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -799,9 +799,7 @@
             transform: scale(1.1);
         }
  
-        .treatment-card:hover .treatment-icon-filter {
-            filter: brightness(0) invert(1);
-        }
+
  
         .treatment-number {
             font-family: 'Cormorant Garamond', serif;
@@ -1679,6 +1677,92 @@
             .navbar.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
         }
 
+        /* ---- line icons ---- */
+        svg.ico { width: 1em; height: 1em; display: block; }
+        .treatment-icon { color: var(--gold); }
+        .treatment-icon svg { width: 30px; height: 30px; }
+        .treatment-card:hover .treatment-icon { color: var(--white); }
+        .credential-icon { color: var(--gold); }
+        .credential-icon svg { width: 20px; height: 20px; }
+        .philosophy-card-icon { color: var(--gold-light); display: flex; justify-content: center; }
+        .philosophy-card-icon svg { width: 46px; height: 46px; stroke-width: 1.2; }
+        .contact-detail-icon { color: var(--gold); }
+        .contact-detail-icon svg { width: 22px; height: 22px; }
+        .hero-image-icon, .placeholder-icon { color: var(--gold); opacity: 0.55; display: flex; justify-content: center; }
+        .hero-image-icon svg, .placeholder-icon svg { width: 56px; height: 56px; stroke-width: 1.1; }
+
+        /* ---- photos: drop images/hero.jpg and images/about.jpg into the repo and they appear ---- */
+        .hero-image-frame img.photo, .about-image-box img.photo {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
+        }
+        .has-photo .hero-image-inner, .has-photo .about-image-box-inner { display: none; }
+
+        /* ---- form spacing ---- */
+        .contact-form form { display: flex; flex-direction: column; gap: 25px; }
+        .form-submit { margin-top: 5px; }
+
+        /* ---- nav ---- */
+        .nav-logo { position: relative; z-index: 1001; }
+        .menu-toggle { padding: 6px 0; }
+
+        /* ---- tablet: stacked hero must not be clipped ---- */
+        .nav-logo-name, .nav-cta { white-space: nowrap; }
+
+        @media (max-width: 1024px) {
+            .hero { height: auto; min-height: 100vh; padding: 130px 0 90px; }
+            .hero-scroll { display: none; }
+
+            /* hamburger menu from tablet down so the logo and links never collide */
+            .navbar { padding: 20px 30px; }
+            .navbar.scrolled { padding: 15px 30px; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .navbar.nav-open { background: var(--white); }
+            .navbar.nav-open .nav-links {
+                display: flex; flex-direction: column;
+                position: fixed; inset: 0; background: var(--white);
+                justify-content: center; align-items: center; gap: 30px; z-index: 999;
+            }
+            .navbar.nav-open .menu-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+            .navbar.nav-open .menu-toggle span:nth-child(2) { opacity: 0; }
+            .navbar.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+            /* photo with stats card tucked under it */
+            .hero-content { gap: 30px; }
+            .hero-image-wrapper { height: auto; width: 300px; margin: 0 auto; }
+            .hero-image-frame { height: 380px; }
+            .hero-stats {
+                position: relative; bottom: auto; left: 50%; transform: translateX(-50%);
+                margin: -45px 0 0; width: max-content; max-width: calc(100vw - 40px);
+                padding: 18px 26px; gap: 22px; justify-content: center;
+            }
+        }
+
+        /* ---- phones ---- */
+        @media (max-width: 768px) {
+            .hero { padding: 110px 0 70px; }
+            .hero-image-wrapper { width: 270px; }
+            .hero-image-frame { height: 350px; }
+            .hero-stats { padding: 18px 22px; gap: 18px; }
+            .hero-stat-number { font-size: 1.8rem; }
+            .hero-stat-label { font-size: 0.55rem; letter-spacing: 1.5px; }
+            .about-accent-box { right: 12px; bottom: -25px; padding: 20px 24px; }
+            .about-grid { gap: 50px; }
+            .scroll-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo-name { font-size: 1.2rem; letter-spacing: 1px; }
+            .nav-logo-tagline { letter-spacing: 3px; }
+            .hero-image-wrapper { width: 240px; }
+            .hero-image-frame { height: 310px; }
+            .hero-stats { flex-direction: row; gap: 14px; padding: 16px 16px; }
+            .hero-stat-number { font-size: 1.5rem; }
+            .hero-stat-divider { width: 1px; height: auto; }
+            .btn-primary { padding: 18px 28px; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1; transform: none; }
@@ -1737,8 +1821,9 @@
             <div class="hero-visual">
                 <div class="hero-image-wrapper">
                     <div class="hero-image-frame">
+                        <img class="photo" src="images/hero.jpg" alt="Dr Chrisna de Villiers" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
                         <div class="hero-image-inner">
-                            <div class="hero-image-icon">✦</div>
+                            <div class="hero-image-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M21 5h-4M5 17v4M7 19H3"/></svg></div>
                             <span class="hero-image-placeholder-text">Your Photo Here</span>
                         </div>
                     </div>
@@ -1838,8 +1923,9 @@
         <div class="about-grid">
             <div class="about-image-container reveal">
                 <div class="about-image-box">
+                    <img class="photo" src="images/about.jpg" alt="Dr Chrisna de Villiers" loading="lazy" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
                     <div class="about-image-box-inner">
-                        <span class="placeholder-icon">✦</span>
+                        <span class="placeholder-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M21 5h-4M5 17v4M7 19H3"/></svg></span>
                         <span class="placeholder-text">Professional Photo</span>
                     </div>
                 </div>
@@ -1870,19 +1956,19 @@
  
                 <div class="about-credentials">
                     <div class="credential-item">
-                        <div class="credential-icon">🏥</div>
+                        <div class="credential-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13z"/><path d="M12 10v6M9 13h6"/></svg></div>
                         <div class="credential-text"><strong>IMC 413939</strong> — Irish Medical Council Registered</div>
                     </div>
                     <div class="credential-item">
-                        <div class="credential-icon">🎓</div>
+                        <div class="credential-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.6 2.7 3 6 3s6-1.4 6-3v-5"/></svg></div>
                         <div class="credential-text"><strong>Cosmed Academy</strong> — Aesthetic Medicine Training, Dublin</div>
                     </div>
                     <div class="credential-item">
-                        <div class="credential-icon">🛡️</div>
+                        <div class="credential-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
                         <div class="credential-text"><strong>Fully Insured</strong> — Professional Indemnity Insurance</div>
                     </div>
                     <div class="credential-item">
-                        <div class="credential-icon">⚕️</div>
+                        <div class="credential-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v5a4 4 0 008 0V3"/><path d="M5 3h2M13 3h2"/><path d="M10 12v3a5 5 0 0010 0v-1"/><circle cx="20" cy="12" r="2"/></svg></div>
                         <div class="credential-text"><strong>GP Background</strong> — 7 Years General Practice Experience</div>
                     </div>
                 </div>
@@ -1907,7 +1993,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">01</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">💉</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2l4 4M17 7l3-3M19 9L8.7 19.3a2 2 0 01-2.8 0l-.6-.6a2 2 0 010-2.8L15 5M9 11l4 4M5 19l-3 3M14 22l7-7"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Anti-Wrinkle Injections</h3>
                     <p class="treatment-desc">
@@ -1929,7 +2015,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">02</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">✨</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M21 5h-4M5 17v4M7 19H3"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Dermal Fillers</h3>
                     <p class="treatment-desc">
@@ -1951,7 +2037,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">03</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">🧬</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Biostimulators</h3>
                     <p class="treatment-desc">
@@ -1973,7 +2059,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">04</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">🌿</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15"/><path d="M5 19c3-5 6-8 11-11"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Skin Rejuvenation</h3>
                     <p class="treatment-desc">
@@ -1995,7 +2081,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">05</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">🧴</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2h6v3H9z"/><path d="M8 5h8v3l1 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2V10l1-2z"/><path d="M7 14h10"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Medical-Grade Skincare</h3>
                     <p class="treatment-desc">
@@ -2017,7 +2103,7 @@
                 <div class="treatment-card reveal">
                     <span class="treatment-number">06</span>
                     <div class="treatment-icon">
-                        <span class="treatment-icon-filter">📋</span>
+                        <span class="treatment-icon-filter"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></svg></span>
                     </div>
                     <h3 class="treatment-name">Full Consultation</h3>
                     <p class="treatment-desc">
@@ -2053,7 +2139,7 @@
  
             <div class="philosophy-grid">
                 <div class="philosophy-card reveal">
-                    <div class="philosophy-card-icon">🩺</div>
+                    <div class="philosophy-card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v5a4 4 0 008 0V3"/><path d="M5 3h2M13 3h2"/><path d="M10 12v3a5 5 0 0010 0v-1"/><circle cx="20" cy="12" r="2"/></svg></div>
                     <h3 class="philosophy-card-title">Medical Expertise</h3>
                     <p class="philosophy-card-text">
                         Every treatment is delivered by a registered medical doctor with over a
@@ -2061,7 +2147,7 @@
                     </p>
                 </div>
                 <div class="philosophy-card reveal">
-                    <div class="philosophy-card-icon">🌸</div>
+                    <div class="philosophy-card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6.2" rx="2.2" ry="3.8"/><ellipse cx="12" cy="6.2" rx="2.2" ry="3.8" transform="rotate(72 12 12)"/><ellipse cx="12" cy="6.2" rx="2.2" ry="3.8" transform="rotate(144 12 12)"/><ellipse cx="12" cy="6.2" rx="2.2" ry="3.8" transform="rotate(216 12 12)"/><ellipse cx="12" cy="6.2" rx="2.2" ry="3.8" transform="rotate(288 12 12)"/></svg></div>
                     <h3 class="philosophy-card-title">Natural Results</h3>
                     <p class="philosophy-card-text">
                         My philosophy centres on enhancing your natural beauty, not changing it. Subtle,
@@ -2069,7 +2155,7 @@
                     </p>
                 </div>
                 <div class="philosophy-card reveal">
-                    <div class="philosophy-card-icon">🤝</div>
+                    <div class="philosophy-card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S4 15.8 4 10a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 10.5-8 10.5z"/></svg></div>
                     <h3 class="philosophy-card-title">Patient-Centred Care</h3>
                     <p class="philosophy-card-text">
                         Your goals, your concerns, your comfort. Every treatment plan is tailored to you
@@ -2182,28 +2268,28 @@
 
                     <div class="contact-details">
                         <div class="contact-detail-item">
-                            <div class="contact-detail-icon">📧</div>
+                            <div class="contact-detail-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
                             <div>
                                 <div class="contact-detail-label">Email</div>
                                 <div class="contact-detail-value"><a data-cfg="email" href="#" style="color:inherit;text-decoration:none;">hello@example.ie</a></div>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <div class="contact-detail-icon">📱</div>
+                            <div class="contact-detail-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div>
                             <div>
                                 <div class="contact-detail-label">Phone</div>
                                 <div class="contact-detail-value"><a data-cfg="phone" href="#" style="color:inherit;text-decoration:none;">+353 XX XXX XXXX</a></div>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <div class="contact-detail-icon">📍</div>
+                            <div class="contact-detail-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
                             <div>
                                 <div class="contact-detail-label">Location</div>
-                                <div class="contact-detail-value" data-cfg="location">Dublin, Ireland</div>
+                                <div class="contact-detail-value" data-cfg="location">Ballincollig, Co. Cork</div>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <div class="contact-detail-icon">🕐</div>
+                            <div class="contact-detail-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
                             <div>
                                 <div class="contact-detail-label">Hours</div>
                                 <div class="contact-detail-value">By Appointment Only</div>
@@ -2284,7 +2370,7 @@
                     <div class="footer-brand-name">Dr Chrisna de Villiers</div>
                     <div class="footer-brand-tagline">Aesthetic Medicine</div>
                     <p class="footer-brand-desc">
-                        Medically-led aesthetic treatments in Ireland.
+                        Medically-led aesthetic treatments in Ballincollig, Co. Cork.
                         Natural results. Expert care. IMC registered.
                     </p>
                 </div>
@@ -2339,7 +2425,7 @@
             email:        'hello@example.ie',          // where enquiries are shown on the site
             phone:        '+353 XX XXX XXXX',          // shown + used for the Call button
             whatsapp:     '353XXXXXXXXX',              // digits only, country code first, no + or spaces
-            location:     'Dublin, Ireland',
+            location:     'Ballincollig, Co. Cork',
             web3formsKey: 'YOUR-WEB3FORMS-ACCESS-KEY'  // from web3forms.com (emails enquiries to her)
         };
         // ============================================================

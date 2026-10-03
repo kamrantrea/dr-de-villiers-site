@@ -13,7 +13,7 @@ Open `index.html`, scroll to the `CONFIG` block near the bottom, and edit:
 | `email` | Email shown on the site |
 | `phone` | Phone shown and used for the Call button |
 | `whatsapp` | Digits only with country code, e.g. `353871234567` (no `+`, no spaces) |
-| `location` | e.g. `Dublin, Ireland` |
+| `location` | Already set to `Ballincollig, Co. Cork` |
 | `web3formsKey` | Access key from Web3Forms (step 2) |
 
 Until a real key is added the form runs in demo mode and just shows a "not connected yet" message, so you can safely show it to her.
@@ -54,9 +54,22 @@ Note: GitHub Pages sites are public even when the repository is private, which i
 
 Double-check these IPs against GitHub's current Pages docs when you do it.
 
-## 5. Before going live checklist
+## 5. Photos (drag and drop, no code)
 
-- [ ] Replace the placeholder photos ("Your Photo Here" / "Professional Photo") with real ones. Save images in the repo and swap the placeholder blocks in `index.html`.
+On github.com open the repo, go to the `images` folder, click **Add file > Upload files**, and drop in:
+
+- `hero.jpg` - portrait of Dr de Villiers for the top of the page (portrait orientation works best)
+- `about.jpg` - second photo for the About section
+
+Name them exactly like that. They appear on the site automatically within a minute or two and replace the placeholders. Photos should be hers (or ones she has the rights to use), ideally under 500 KB each.
+
+## 6. Instagram link in bio
+
+Use `https://<site-address>/book.html` as her Instagram bio link. It jumps straight to the booking form. Once the custom domain is set up it becomes `https://her-domain.ie/book.html`.
+
+## 7. Before going live checklist
+
+- [ ] Add the two photos (step 5).
 - [ ] Confirm the "10+ years", "1000s patients" and credential claims are accurate.
 - [ ] Review and finalise `privacy.html` (it is a draft template; delete the pink DRAFT box when done).
 - [ ] Set up a professional email on her domain (Google Workspace or Microsoft 365).
@@ -68,5 +81,7 @@ Double-check these IPs against GitHub's current Pages docs when you do it.
 - Removed the preloader and custom cursor (slower, no benefit on mobile).
 - Removed placeholder testimonials (see above).
 - Replaced the non-working contact form with a real enquiry form plus WhatsApp and Call buttons.
-- Fixed the broken Google Fonts link, the mobile menu, an invalid CSS value, and the misspelt email address.
+- Fixed the broken Google Fonts link, the mobile and tablet menu, the hero stats box overlapping text on phones, the cramped form, an invalid CSS value, and the misspelt email address.
+- Replaced all emoji with consistent line icons.
+- Hamburger menu now starts at tablet width so the logo and links never collide.
 - Added accessibility basics (focus outlines, form labels, reduced-motion support) and a privacy page.
