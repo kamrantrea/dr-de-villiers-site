@@ -4,7 +4,7 @@
    there are never any broken buttons on the live site.
    ============================================================ */
 window.SITE = {
-    email:        'dkhsjets@gmail.com',          // shown on the site
+    email:        'hello@example.ie',          // shown on the site (placeholder hides it until her real address is added)
     phone:        '+353 85 840 7680',          // shown and used for the Call button
     whatsapp:     '353858407680',              // digits only, country code first, no + or spaces
     instagram:    'drchrisnaaesthetics',       // handle only (blank hides the link)
